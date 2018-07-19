@@ -1,0 +1,17 @@
+<idea-plugin>
+    <id>com.github.camork.fileExpander</id>
+    <name>File Expander</name>
+    <vendor email="camork1@gmail.com" url="https://github.com/camork/file-expander-plugin">Charles Wu</vendor>
+
+    <description>
+    <![CDATA[<p>
+		This plugin can explore archive-based file in project view
+	</p>
+	]]>
+    </description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <treeStructureProvider implementation="com.github.camork.extensions.ArchiveTreeProvider"/>
+    </extensions>
+
+</idea-plugin>
