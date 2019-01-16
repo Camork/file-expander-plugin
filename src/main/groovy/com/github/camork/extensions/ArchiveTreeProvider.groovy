@@ -1,5 +1,7 @@
 package com.github.camork.extensions
 
+import com.github.camork.filesystem.gz.GZFileSystem
+import com.github.camork.filesystem.gz.GZFileType
 import com.github.camork.nodes.ArchiveBasedPsiNode
 import com.intellij.ide.highlighter.ArchiveFileType
 import com.intellij.ide.projectView.TreeStructureProvider
@@ -23,23 +25,37 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 										@NotNull Collection<AbstractTreeNode> children,
 										ViewSettings settings) {
 		return children.collect {
-			if (it instanceof PsiFileNode &&
-					it.virtualFile?.isValid() &&
-					it.virtualFile?.fileType == ArchiveFileType.INSTANCE) {
+			if (it instanceof PsiFileNode && it.virtualFile?.isValid()) {
+				def fileType = it.virtualFile?.fileType
 
-				VirtualFile jarFile = JarFileSystem.getInstance().getJarRootForLocalFile(it.virtualFile)
+				if (fileType == ArchiveFileType.INSTANCE) {
 
-				if (jarFile != null) {
-					final PsiManager psiManager = PsiManager.getInstance(parent.project)
-					final PsiDirectory psiDir = psiManager.findDirectory(jarFile)
+					VirtualFile jarFile = JarFileSystem.getInstance().getJarRootForLocalFile(it.virtualFile)
 
-					return psiDir != null
-							? new ArchiveBasedPsiNode(parent.project, psiDir, jarFile, settings)
-							: it
+					if (jarFile != null) {
+						final PsiManager psiManager = PsiManager.getInstance(parent.project)
+						final PsiDirectory psiDir = psiManager.findDirectory(jarFile)
+
+						return psiDir != null
+								? new ArchiveBasedPsiNode(parent.project, psiDir, jarFile, settings)
+								: it
+					}
+				}
+				else if (fileType == GZFileType.INSTANCE) {
+					VirtualFile gzFile = GZFileSystem.getInstance().getRootByLocal(it.virtualFile)
+
+					if (gzFile != null) {
+						final PsiManager psiManager = PsiManager.getInstance(parent.project)
+						final PsiDirectory psiDir = psiManager.findDirectory(gzFile)
+
+						return psiDir != null
+								? new ArchiveBasedPsiNode(parent.project, psiDir, gzFile, settings)
+								: it
+					}
 				}
 			}
+
 			return it
 		}
 	}
-
 }

@@ -12,6 +12,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider implementation="com.github.camork.extensions.ArchiveTreeProvider"/>
+        <fileTypeFactory implementation="com.github.camork.filesystem.PluginFileTypeFactory"/>
+        <virtualFileSystem key="gzip" implementationClass="com.github.camork.filesystem.gz.GZFileSystemImpl"/>
     </extensions>
 
 </idea-plugin>
