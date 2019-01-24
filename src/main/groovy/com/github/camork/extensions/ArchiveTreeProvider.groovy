@@ -2,6 +2,8 @@ package com.github.camork.extensions
 
 import com.github.camork.filesystem.gz.GZFileSystem
 import com.github.camork.filesystem.gz.GZFileType
+import com.github.camork.filesystem.tar.TarFileSystem
+import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.nodes.ArchiveBasedPsiNode
 import com.intellij.ide.highlighter.ArchiveFileType
 import com.intellij.ide.projectView.TreeStructureProvider
@@ -50,6 +52,18 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
 						return psiDir != null
 								? new ArchiveBasedPsiNode(parent.project, psiDir, gzFile, settings)
+								: it
+					}
+				}
+				else if (fileType == TarFileType.INSTANCE) {
+					VirtualFile tarFile = TarFileSystem.getInstance().getRootByLocal(it.virtualFile)
+
+					if (tarFile != null) {
+						final PsiManager psiManager = PsiManager.getInstance(parent.project)
+						final PsiDirectory psiDir = psiManager.findDirectory(tarFile)
+
+						return psiDir != null
+								? new ArchiveBasedPsiNode(parent.project, psiDir, tarFile, settings)
 								: it
 					}
 				}
