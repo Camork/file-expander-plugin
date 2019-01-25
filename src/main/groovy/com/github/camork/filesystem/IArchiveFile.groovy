@@ -8,4 +8,5 @@ interface IArchiveFile {
     InputStream getInputStream()
 
     void closeStream()
+
 }

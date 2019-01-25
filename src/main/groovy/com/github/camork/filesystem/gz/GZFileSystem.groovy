@@ -13,20 +13,20 @@ import org.jetbrains.annotations.NotNull
  */
 abstract class GZFileSystem extends ArchiveBasedFileSystem {
 
-	public static final String PROTOCOL = 'gzip'
+    public static final String PROTOCOL = 'gzip'
 
-	static GZFileSystem getInstance() {
-		return VirtualFileManager.getInstance().getFileSystem(PROTOCOL) as GZFileSystem
-	}
+    static GZFileSystem getInstance() {
+        return VirtualFileManager.getInstance().getFileSystem(PROTOCOL) as GZFileSystem
+    }
 
-	@Override
-	protected ArchiveHandler getHandler(@NotNull VirtualFile entryFile) {
-		return VfsImplUtil.getHandler(this, entryFile, { path -> new GZFileHandler(path) })
-	}
+    @Override
+    protected ArchiveHandler getHandler(@NotNull VirtualFile entryFile) {
+        return VfsImplUtil.getHandler(this, entryFile, { path -> new GZFileHandler(path) })
+    }
 
-	@Override
-	protected boolean isCorrectFileType(@NotNull VirtualFile local) {
-		return FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == GZFileType.INSTANCE
-	}
+    @Override
+    protected boolean isCorrectFileType(@NotNull VirtualFile local) {
+        return FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == GZFileType.INSTANCE
+    }
 
 }

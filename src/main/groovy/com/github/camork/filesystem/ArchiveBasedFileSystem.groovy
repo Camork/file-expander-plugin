@@ -12,59 +12,59 @@ import org.jetbrains.annotations.NotNull
  */
 abstract class ArchiveBasedFileSystem extends ArchiveFileSystem {
 
-	static final String SEPARATOR = '!/'
+    static final String SEPARATOR = '!/'
 
-	static boolean isValid(String path) {
-		return path.contains(separator)
-	}
+    static boolean isValid(String path) {
+        return path.contains(separator)
+    }
 
-	protected static String getSeparator() {
-		SEPARATOR
-	}
+    protected static String getSeparator() {
+        SEPARATOR
+    }
 
-	@Override
-	protected String composeRootPath(@NotNull String localPath) {
-		localPath + separator
-	}
+    @Override
+    protected String composeRootPath(@NotNull String localPath) {
+        return localPath + separator
+    }
 
-	@Override
-	protected String extractLocalPath(@NotNull String rootPath) {
-		return StringUtil.trimEnd(rootPath, separator)
-	}
+    @Override
+    protected String extractLocalPath(@NotNull String rootPath) {
+        return StringUtil.trimEnd(rootPath, separator)
+    }
 
-	@Override
-	protected String extractRootPath(@NotNull String path) {
-		final int jarSeparatorIndex = path.indexOf(separator)
+    @Override
+    protected String extractRootPath(@NotNull String path) {
+        final int jarSeparatorIndex = path.indexOf(separator)
 
-		assert jarSeparatorIndex >= 0: "Path passed to ${this.class} must have separator '${separator}': " + path
+        assert jarSeparatorIndex >= 0: "Path passed to ${this.class} must have separator '${separator}': " + path
 
-		return path.substring(0, jarSeparatorIndex + separator.length())
-	}
+        return path.substring(0, jarSeparatorIndex + separator.length())
+    }
 
-	@Override
-	VirtualFile findFileByPathIfCached(@NotNull String path) {
-		return isValid(path) ? VfsImplUtil.findFileByPathIfCached(this, path) : null
-	}
+    @Override
+    VirtualFile findFileByPathIfCached(@NotNull String path) {
+        return isValid(path) ? VfsImplUtil.findFileByPathIfCached(this, path) : null
+    }
 
-	@Override
-	VirtualFile findFileByPath(@NotNull String path) {
-		return isValid(path) ? VfsImplUtil.findFileByPath(this, path) : null
-	}
+    @Override
+    VirtualFile findFileByPath(@NotNull String path) {
+        return isValid(path) ? VfsImplUtil.findFileByPath(this, path) : null
+    }
 
-	@Override
-	void refresh(boolean asynchronous) {
-		VfsImplUtil.refresh(this, asynchronous)
-	}
+    @Override
+    void refresh(boolean asynchronous) {
+        VfsImplUtil.refresh(this, asynchronous)
+    }
 
-	@Override
-	VirtualFile refreshAndFindFileByPath(@NotNull String path) {
-		return isValid(path) ? VfsImplUtil.refreshAndFindFileByPath(this, path) : null
-	}
+    @Override
+    VirtualFile refreshAndFindFileByPath(@NotNull String path) {
+        return isValid(path) ? VfsImplUtil.refreshAndFindFileByPath(this, path) : null
+    }
 
-	@NotNull
-	@Override
-	String normalize(@NotNull String path) {
-		int p = path.indexOf(SEPARATOR)
-		return p > 0 ? FileUtil.normalize(path.substring(0, p)) + path.substring(p) : super.normalize(path)
-	}
+    @NotNull
+    @Override
+    String normalize(@NotNull String path) {
+        int p = path.indexOf(SEPARATOR)
+        return p > 0 ? FileUtil.normalize(path.substring(0, p)) + path.substring(p) : super.normalize(path)
+    }
 }

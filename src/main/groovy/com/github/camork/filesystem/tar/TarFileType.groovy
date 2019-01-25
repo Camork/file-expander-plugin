@@ -8,16 +8,16 @@ import com.intellij.openapi.fileTypes.FileType
  */
 class TarFileType extends ArchiveBasedFileType {
 
-	public static final FileType INSTANCE = new TarFileType()
+    public static final FileType INSTANCE = new TarFileType()
 
-	@Override
-	String getName() {
-		return "TAR"
-	}
+    @Override
+    String getName() {
+        return 'TAR'
+    }
 
-	@Override
-	String getDefaultExtension() {
-		return "tar"
-	}
+    @Override
+    String getDefaultExtension() {
+        return 'tar'
+    }
 
 }

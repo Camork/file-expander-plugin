@@ -9,41 +9,41 @@ import java.util.zip.GZIPInputStream
  */
 class GZFile {
 
-	private final File _file
+    private final File _file
 
-	private final long length
+    private final long length
 
-	private final long lastModified
+    private final long lastModified
 
-	private final String name
+    private final String name
 
-	GZFile(File file) {
-		_file = file
-		length = _file.length()
-		lastModified = _file.lastModified()
+    GZFile(File file) {
+        _file = file
+        length = _file.length()
+        lastModified = _file.lastModified()
 
-		name = GzipUtils.getUncompressedFilename(file.getName())
-	}
+        name = GzipUtils.getUncompressedFilename(file.getName())
+    }
 
-	long getLength() {
-		length
-	}
+    long getLength() {
+        length
+    }
 
-	String getName() {
-		name
-	}
+    String getName() {
+        name
+    }
 
-	long getLastModified() {
-		lastModified
-	}
+    long getLastModified() {
+        lastModified
+    }
 
-	byte[] getBytes() {
-		_file.withInputStream {
-			stream ->
-				new GZIPInputStream(stream).withCloseable {
-					gzStream -> gzStream.getBytes()
-				}
-		} as byte[]
-	}
+    byte[] getBytes() {
+        _file.withInputStream {
+            stream ->
+                new GZIPInputStream(stream).withCloseable {
+                    gzStream -> gzStream.getBytes()
+                }
+        } as byte[]
+    }
 
 }

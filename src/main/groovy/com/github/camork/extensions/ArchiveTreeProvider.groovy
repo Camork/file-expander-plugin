@@ -21,55 +21,55 @@ import org.jetbrains.annotations.NotNull
  */
 class ArchiveTreeProvider implements TreeStructureProvider {
 
-	@NotNull
-	@Override
-	Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
-										@NotNull Collection<AbstractTreeNode> children,
-										ViewSettings settings) {
-		return children.collect {
-			if (it instanceof PsiFileNode && it.virtualFile?.isValid()) {
-				def fileType = it.virtualFile?.fileType
+    @NotNull
+    @Override
+    Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
+                                        @NotNull Collection<AbstractTreeNode> children,
+                                        ViewSettings settings) {
+        return children.collect {
+            if (it instanceof PsiFileNode && it.virtualFile?.isValid()) {
+                def fileType = it.virtualFile?.fileType
 
-				if (fileType == ArchiveFileType.INSTANCE) {
+                if (fileType == ArchiveFileType.INSTANCE) {
 
-					VirtualFile jarFile = JarFileSystem.getInstance().getJarRootForLocalFile(it.virtualFile)
+                    VirtualFile jarFile = JarFileSystem.getInstance().getJarRootForLocalFile(it.virtualFile)
 
-					if (jarFile != null) {
-						final PsiManager psiManager = PsiManager.getInstance(parent.project)
-						final PsiDirectory psiDir = psiManager.findDirectory(jarFile)
+                    if (jarFile != null) {
+                        final PsiManager psiManager = PsiManager.getInstance(parent.project)
+                        final PsiDirectory psiDir = psiManager.findDirectory(jarFile)
 
-						return psiDir != null
-								? new ArchiveBasedPsiNode(parent.project, psiDir, jarFile, settings)
-								: it
-					}
-				}
-				else if (fileType == GZFileType.INSTANCE) {
-					VirtualFile gzFile = GZFileSystem.getInstance().getRootByLocal(it.virtualFile)
+                        return psiDir != null
+                                ? new ArchiveBasedPsiNode(parent.project, psiDir, jarFile, settings)
+                                : it
+                    }
+                }
+                else if (fileType == GZFileType.INSTANCE) {
+                    VirtualFile gzFile = GZFileSystem.getInstance().getRootByLocal(it.virtualFile)
 
-					if (gzFile != null) {
-						final PsiManager psiManager = PsiManager.getInstance(parent.project)
-						final PsiDirectory psiDir = psiManager.findDirectory(gzFile)
+                    if (gzFile != null) {
+                        final PsiManager psiManager = PsiManager.getInstance(parent.project)
+                        final PsiDirectory psiDir = psiManager.findDirectory(gzFile)
 
-						return psiDir != null
-								? new ArchiveBasedPsiNode(parent.project, psiDir, gzFile, settings)
-								: it
-					}
-				}
-				else if (fileType == TarFileType.INSTANCE) {
-					VirtualFile tarFile = TarFileSystem.getInstance().getRootByLocal(it.virtualFile)
+                        return psiDir != null
+                                ? new ArchiveBasedPsiNode(parent.project, psiDir, gzFile, settings)
+                                : it
+                    }
+                }
+                else if (fileType == TarFileType.INSTANCE) {
+                    VirtualFile tarFile = TarFileSystem.getInstance().getRootByLocal(it.virtualFile)
 
-					if (tarFile != null) {
-						final PsiManager psiManager = PsiManager.getInstance(parent.project)
-						final PsiDirectory psiDir = psiManager.findDirectory(tarFile)
+                    if (tarFile != null) {
+                        final PsiManager psiManager = PsiManager.getInstance(parent.project)
+                        final PsiDirectory psiDir = psiManager.findDirectory(tarFile)
 
-						return psiDir != null
-								? new ArchiveBasedPsiNode(parent.project, psiDir, tarFile, settings)
-								: it
-					}
-				}
-			}
+                        return psiDir != null
+                                ? new ArchiveBasedPsiNode(parent.project, psiDir, tarFile, settings)
+                                : it
+                    }
+                }
+            }
 
-			return it
-		}
-	}
+            return it
+        }
+    }
 }

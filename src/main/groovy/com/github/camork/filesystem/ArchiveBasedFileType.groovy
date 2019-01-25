@@ -12,29 +12,29 @@ import javax.swing.Icon
  */
 abstract class ArchiveBasedFileType implements FileType {
 
-	@Override
-	String getDescription() {
-		return null
-	}
+    @Override
+    String getDescription() {
+        null
+    }
 
-	@Override
-	Icon getIcon() {
-		return AllIcons.FileTypes.Archive
-	}
+    @Override
+    Icon getIcon() {
+        AllIcons.FileTypes.Archive
+    }
 
-	@Override
-	boolean isBinary() {
-		return true
-	}
+    @Override
+    boolean isBinary() {
+        true
+    }
 
-	@Override
-	boolean isReadOnly() {
-		return false
-	}
+    @Override
+    boolean isReadOnly() {
+        false
+    }
 
-	@Override
-	String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
-		return null
-	}
+    @Override
+    String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
+        null
+    }
 
 }

@@ -34,7 +34,7 @@ abstract class ArchiveHandlerBase<T> extends ArchiveHandler {
 
     @NotNull
     protected ResourceHandle<T> acquireFileHandle() throws IOException {
-        getCachedFileHandle(true)
+        return getCachedFileHandle(true)
     }
 
     private FileAccessorCache.Handle<T> getCachedFileHandle(boolean createIfNeeded) throws IOException {

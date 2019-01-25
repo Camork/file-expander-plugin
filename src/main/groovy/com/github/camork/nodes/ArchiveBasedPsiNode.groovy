@@ -16,39 +16,39 @@ import org.jetbrains.annotations.NotNull
  */
 class ArchiveBasedPsiNode extends PsiDirectoryNode {
 
-	private final VirtualFile _archiveFile
+    private final VirtualFile _archiveFile
 
-	ArchiveBasedPsiNode(Project project, @NotNull PsiDirectory value, VirtualFile jarFile, ViewSettings viewSettings) {
-		super(project, value, viewSettings)
-		_archiveFile = jarFile
-	}
+    ArchiveBasedPsiNode(Project project, @NotNull PsiDirectory value, VirtualFile jarFile, ViewSettings viewSettings) {
+        super(project, value, viewSettings)
+        _archiveFile = jarFile
+    }
 
-	@Override
-	Collection<AbstractTreeNode> getChildrenImpl() {
-		final PsiManager psiManager = PsiManager.getInstance(project)
+    @Override
+    Collection<AbstractTreeNode> getChildrenImpl() {
+        final PsiManager psiManager = PsiManager.getInstance(project)
 
-		VirtualFile[] virtualFiles = _archiveFile.children
-		Collection<AbstractTreeNode> children = new ArrayList<>(virtualFiles.length)
-		for (file in virtualFiles) {
-			if (!file.isValid()) {
-				continue
-			}
+        VirtualFile[] virtualFiles = _archiveFile.children
+        Collection<AbstractTreeNode> children = new ArrayList<>(virtualFiles.length)
+        for (file in virtualFiles) {
+            if (!file.isValid()) {
+                continue
+            }
 
-			if (file.isDirectory()) {
-				final PsiDirectory psiDir = psiManager.findDirectory(file)
-				if (psiDir != null) {
-					children.add(new ArchiveBasedPsiNode(project, psiDir, file, settings))
-				}
-			}
-			else {
-				final PsiFile psiFile = psiManager.findFile(file)
-				if (psiFile != null) {
-					children.add(new PsiFileNode(project, psiFile, settings))
-				}
-			}
-		}
+            if (file.isDirectory()) {
+                final PsiDirectory psiDir = psiManager.findDirectory(file)
+                if (psiDir != null) {
+                    children.add(new ArchiveBasedPsiNode(project, psiDir, file, settings))
+                }
+            }
+            else {
+                final PsiFile psiFile = psiManager.findFile(file)
+                if (psiFile != null) {
+                    children.add(new PsiFileNode(project, psiFile, settings))
+                }
+            }
+        }
 
-		return children
-	}
+        return children
+    }
 
 }

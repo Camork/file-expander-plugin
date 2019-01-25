@@ -8,16 +8,16 @@ import com.intellij.openapi.fileTypes.FileType
  */
 class GZFileType extends ArchiveBasedFileType {
 
-	public static final FileType INSTANCE = new GZFileType()
+    public static final FileType INSTANCE = new GZFileType()
 
-	@Override
-	String getName() {
-		return "GZIP"
-	}
+    @Override
+    String getName() {
+        'GZIP'
+    }
 
-	@Override
-	String getDefaultExtension() {
-		return "gz"
-	}
+    @Override
+    String getDefaultExtension() {
+        'gz'
+    }
 
 }

@@ -37,18 +37,18 @@ class TarFile implements IArchiveFile {
 
     Map<String, ArchiveEntry> calculateEntries() {
         if (entries == null) {
-            entries = inputStream.withCloseable {
+            return entries = inputStream.withCloseable {
                 ArchiveUtils.calculateEntries(it)
             }
         }
         else {
-            entries
+            return entries
         }
     }
 
     Map<String, ?> createEntriesInfoMap() {
         return inputStream.withCloseable {
-            ArchiveUtils.buildEntryMap(calculateEntries(), it)
+            ArchiveUtils.buildEntryMap(calculateEntries())
         }
     }
 

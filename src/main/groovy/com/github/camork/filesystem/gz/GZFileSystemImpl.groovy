@@ -5,9 +5,9 @@ package com.github.camork.filesystem.gz
  */
 class GZFileSystemImpl extends GZFileSystem {
 
-	@Override
-	String getProtocol() {
-		PROTOCOL
-	}
+    @Override
+    String getProtocol() {
+        PROTOCOL
+    }
 
 }
