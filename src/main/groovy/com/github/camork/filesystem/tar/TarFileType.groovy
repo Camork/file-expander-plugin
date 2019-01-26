@@ -1,4 +1,4 @@
-package com.github.camork.filesystem.gz
+package com.github.camork.filesystem.tar
 
 import com.github.camork.filesystem.ArchiveBasedFileType
 import com.intellij.openapi.fileTypes.FileType
@@ -6,18 +6,18 @@ import com.intellij.openapi.fileTypes.FileType
 /**
  * @author Charles Wu
  */
-class GZFileType extends ArchiveBasedFileType {
+class TarFileType extends ArchiveBasedFileType {
 
-    public static final FileType INSTANCE = new GZFileType()
+    public static final FileType INSTANCE = new TarFileType()
 
     @Override
     String getName() {
-        'GZIP'
+        return 'TAR'
     }
 
     @Override
     String getDefaultExtension() {
-        'gz'
+        return 'tar'
     }
 
 }

@@ -1,4 +1,4 @@
-package com.github.camork.filesystem.gz
+package com.github.camork.filesystem.tar
 
 import com.github.camork.filesystem.ArchiveBasedFileSystem
 import com.intellij.openapi.fileTypes.FileTypeRegistry
@@ -11,22 +11,22 @@ import org.jetbrains.annotations.NotNull
 /**
  * @author Charles Wu
  */
-abstract class GZFileSystem extends ArchiveBasedFileSystem {
+abstract class TarFileSystem extends ArchiveBasedFileSystem {
 
-    public static final String PROTOCOL = 'gzip'
+    public static final String PROTOCOL = 'tar'
 
-    static GZFileSystem getInstance() {
-        return VirtualFileManager.getInstance().getFileSystem(PROTOCOL) as GZFileSystem
+    static TarFileSystem getInstance() {
+        return VirtualFileManager.getInstance().getFileSystem(PROTOCOL) as TarFileSystem
     }
 
     @Override
     protected ArchiveHandler getHandler(@NotNull VirtualFile entryFile) {
-        return VfsImplUtil.getHandler(this, entryFile, { path -> new GZFileHandler(path) })
+        return VfsImplUtil.getHandler(this, entryFile, { path -> new TarFileHandler(path) })
     }
 
     @Override
     protected boolean isCorrectFileType(@NotNull VirtualFile local) {
-        return FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == GZFileType.INSTANCE
+        return FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == TarFileType.INSTANCE
     }
 
 }

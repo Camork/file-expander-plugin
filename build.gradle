@@ -1,6 +1,6 @@
 plugins {
-	id 'groovy'
-	id 'org.jetbrains.intellij' version '0.4.1'
+    id 'groovy'
+    id 'org.jetbrains.intellij' version '0.4.1'
 }
 
 group 'com.github.camork'
@@ -9,14 +9,16 @@ version '0.1'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
+configurations.testCompile.extendsFrom(configurations.compileOnly)
+
 dependencies {
-	compileOnly 'org.codehaus.groovy:groovy-all:2.4.15'
-	compileOnly 'org.apache.commons:commons-compress:1.18'
+    compileOnly 'org.codehaus.groovy:groovy-all:2.4.15'
+    compileOnly 'org.apache.commons:commons-compress:1.18'
 }
 
 intellij {
-	version 'IC-2018.3.2'
+    version 'IC-2018.3.2'
 }
