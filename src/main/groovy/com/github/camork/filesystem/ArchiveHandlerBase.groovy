@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull
 /**
  * @author Charles Wu
  */
-abstract class ArchiveHandlerBase<T> extends ArchiveHandler {
+abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler {
 
     protected volatile String canonicalPathToFile
     protected volatile long _fileStamp
@@ -35,6 +35,16 @@ abstract class ArchiveHandlerBase<T> extends ArchiveHandler {
     @NotNull
     protected ResourceHandle<T> acquireFileHandle() throws IOException {
         return getCachedFileHandle(true)
+    }
+
+    @Override
+    protected Map<String, ?> createEntriesMap() throws IOException {
+        return acquireFileHandle().get().createEntriesInfoMap()
+    }
+
+    @Override
+    byte[] contentsToByteArray(@NotNull String relativePath) throws IOException {
+        return acquireFileHandle().get().getEntryBytes(relativePath)
     }
 
     private FileAccessorCache.Handle<T> getCachedFileHandle(boolean createIfNeeded) throws IOException {

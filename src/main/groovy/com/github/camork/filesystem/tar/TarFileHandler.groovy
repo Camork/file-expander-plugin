@@ -14,18 +14,8 @@ class TarFileHandler extends ArchiveHandlerBase<TarFile> {
     }
 
     @Override
-    protected Map<String, ?> createEntriesMap() throws IOException {
-        return acquireFileHandle().get().createEntriesInfoMap()
-    }
-
-    @Override
-    byte[] contentsToByteArray(@NotNull String relativePath) throws IOException {
-        return acquireFileHandle().get().getEntryBytes(relativePath)
-    }
-
-    @Override
-    FileAccessorCache getFileAccessor() {
-        return fileAccessor
+    FileAccessorCache<TarFileHandler, TarFile> getFileAccessor() {
+        fileAccessor
     }
 
     private static final FileAccessorCache<TarFileHandler, TarFile> fileAccessor = new FileAccessorCache<TarFileHandler, TarFile>(20, 10) {

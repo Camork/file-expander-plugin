@@ -23,16 +23,29 @@ class TarFile implements IArchiveFile {
     }
 
     @Override
+    Map<String, ?> createEntriesInfoMap() {
+        return inputStream.withCloseable {
+            ArchiveUtils.buildEntryMap(calculateEntries())
+        }
+    }
+
+    @Override
+    byte[] getEntryBytes(String relativePath) {
+        ArchiveEntry item = calculateEntries().get(relativePath)
+
+        return ArchiveUtils.getEntryBytes(inputStream, item)
+    }
+
+    @Override
     ArchiveInputStream getInputStream() {
         _fileInputStream = new FileInputStream(_file)
 
         return new TarArchiveInputStream(_fileInputStream)
     }
 
-    byte[] getEntryBytes(String relativePath) {
-        ArchiveEntry item = calculateEntries().get(relativePath)
-
-        return ArchiveUtils.getEntryBytes(inputStream, item)
+    @Override
+    void closeStream() {
+        _fileInputStream?.close()
     }
 
     Map<String, ArchiveEntry> calculateEntries() {
@@ -44,17 +57,6 @@ class TarFile implements IArchiveFile {
         else {
             return entries
         }
-    }
-
-    Map<String, ?> createEntriesInfoMap() {
-        return inputStream.withCloseable {
-            ArchiveUtils.buildEntryMap(calculateEntries())
-        }
-    }
-
-    @Override
-    void closeStream() {
-        _fileInputStream?.close()
     }
 
 }

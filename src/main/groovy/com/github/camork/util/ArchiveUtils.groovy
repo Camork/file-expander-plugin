@@ -42,8 +42,8 @@ class ArchiveUtils {
      * @return constructed a archive entries info map
      */
     @NotNull
-    static Map<String, ArchiveHandler.EntryInfo> buildEntryMap(Map<String, ArchiveEntry> entries) {
-        Map<String, ArchiveHandler.EntryInfo> map = new HashMap<>(entries.size())
+    static Map<String, EntryInfo> buildEntryMap(Map<String, ArchiveEntry> entries) {
+        Map<String, EntryInfo> map = new HashMap<>(entries.size())
         map.put("", createRootEntry())
 
         for (Map.Entry<String, ArchiveEntry> entry : entries.entrySet()) {
@@ -54,14 +54,14 @@ class ArchiveUtils {
     }
 
     /**
-     * wrap the given {@link ArchiveEntry} to a {@link ArchiveHandler.EntryInfo}
+     * wrap the given {@link ArchiveEntry} to a {@link EntryInfo}
      *
      * @param map map result
      * @param entries all entries in this archive
      * @return
      */
-    static ArchiveHandler.EntryInfo getOrCreate(@NotNull ArchiveEntry entry,
-                                                @NotNull Map<String, ArchiveHandler.EntryInfo> map,
+    static EntryInfo getOrCreate(@NotNull ArchiveEntry entry,
+                                                @NotNull Map<String, EntryInfo> map,
                                                 @NotNull Map<String, ArchiveEntry> entries) {
         boolean isDirectory = entry.isDirectory()
         String entryName = entry.getName()
@@ -71,26 +71,26 @@ class ArchiveUtils {
         }
 
         //get from cache
-        ArchiveHandler.EntryInfo info = map.get(entryName)
+        EntryInfo info = map.get(entryName)
         if (info != null) {
             return info
         }
 
         //create node
         Pair<String, String> path = splitPath(entryName)
-        ArchiveHandler.EntryInfo parentInfo = getOrCreate(path.first, map, entries)
+        EntryInfo parentInfo = getOrCreate(path.first, map, entries)
         if ('.' == path.second) {
             return parentInfo
         }
-        info = store(map, parentInfo, path.second, isDirectory, entry.getSize(), entry.lastModifiedDate.time, entryName);
+        info = store(map, parentInfo, path.second, isDirectory, entry.getSize(), entry.lastModifiedDate.time, entryName)
         return info
     }
 
     @NotNull
-    static ArchiveHandler.EntryInfo getOrCreate(@NotNull String entryName,
-                                                @NotNull Map<String, ArchiveHandler.EntryInfo> map,
+    static EntryInfo getOrCreate(@NotNull String entryName,
+                                                @NotNull Map<String, EntryInfo> map,
                                                 @NotNull Map<String, ArchiveEntry> entries) {
-        ArchiveHandler.EntryInfo info = map.get(entryName)
+        EntryInfo info = map.get(entryName)
 
         if (info == null) {
             ArchiveEntry entry = entries.get(entryName + '/')
@@ -100,13 +100,13 @@ class ArchiveUtils {
 
             Pair<String, String> path = splitPath(entryName)
 
-            ArchiveHandler.EntryInfo parentInfo = getOrCreate(path.first, map, entries)
+            EntryInfo parentInfo = getOrCreate(path.first, map, entries)
             info = store(map, parentInfo, path.second, true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, entryName)
         }
 
         if (!info.isDirectory) {
             Logger.getInstance(this.class).info("${entryName} should be a directory")
-            info = store(map, info.parent, info.shortName, true, info.length, info.timestamp, entryName)
+            info = store(map, (EntryInfo)info.parent, info.shortName, true, info.length, info.timestamp, entryName)
         }
 
         return info
@@ -126,15 +126,15 @@ class ArchiveUtils {
     }
 
     @NotNull
-    private static ArchiveHandler.EntryInfo store(@NotNull Map<String, ArchiveHandler.EntryInfo> map,
-                                                  @Nullable ArchiveHandler.EntryInfo parentInfo,
+    private static EntryInfo store(@NotNull Map<String, EntryInfo> map,
+                                                  @Nullable EntryInfo parentInfo,
                                                   @NotNull CharSequence shortName,
                                                   boolean isDirectory,
                                                   long size,
                                                   long time,
                                                   @NotNull String entryName) {
         CharSequence sequence = shortName instanceof ByteArrayCharSequence ? shortName : ByteArrayCharSequence.convertToBytesIfPossible(shortName)
-        ArchiveHandler.EntryInfo info = new ArchiveHandler.EntryInfo(sequence, isDirectory, size, time, parentInfo)
+        EntryInfo info = new EntryInfo(sequence, isDirectory, size, time, parentInfo)
         map.put(entryName, info)
         return info
     }
@@ -148,8 +148,8 @@ class ArchiveUtils {
     }
 
     @NotNull
-    private static ArchiveHandler.EntryInfo createRootEntry() {
-        return new ArchiveHandler.EntryInfo('', true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
+    private static EntryInfo createRootEntry() {
+        return new EntryInfo('', true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
     }
 
 }

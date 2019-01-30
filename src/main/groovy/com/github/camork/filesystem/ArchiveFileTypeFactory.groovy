@@ -13,8 +13,8 @@ class ArchiveFileTypeFactory extends FileTypeFactory {
 
     @Override
     void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
-        fileTypeConsumer.consume(GZFileType.INSTANCE, "gz");
-        fileTypeConsumer.consume(TarFileType.INSTANCE, "tar");
+        fileTypeConsumer.consume(GZFileType.INSTANCE, "gz")
+        fileTypeConsumer.consume(TarFileType.INSTANCE, "tar")
     }
 
 }

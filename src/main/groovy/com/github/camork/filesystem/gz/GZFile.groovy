@@ -1,5 +1,8 @@
 package com.github.camork.filesystem.gz
 
+import com.github.camork.filesystem.IArchiveFile
+import com.github.camork.util.ArchiveUtils
+import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.compressors.gzip.GzipUtils
 
 import java.util.zip.GZIPInputStream
@@ -7,43 +10,49 @@ import java.util.zip.GZIPInputStream
 /**
  * @author Charles Wu
  */
-class GZFile {
+class GZFile implements IArchiveFile {
 
     private final File _file
 
-    private final long length
+    private final String _name
 
-    private final long lastModified
+    private BufferedInputStream _inputStream
 
-    private final String name
+    private GZIPInputStream _gZIPInputStream
 
     GZFile(File file) {
         _file = file
-        length = _file.length()
-        lastModified = _file.lastModified()
 
-        name = GzipUtils.getUncompressedFilename(file.getName())
+        _name = GzipUtils.getUncompressedFilename(file.getName())
     }
 
-    long getLength() {
-        length
+    @Override
+    Map<String, ?> createEntriesInfoMap() {
+        Map entries = [:]
+
+        def root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
+        entries.put('', root)
+        entries.put(_name, new EntryInfo(_name, false, _file.length(), _file.lastModified(), root))
+
+        return entries
     }
 
-    String getName() {
-        name
+    @Override
+    byte[] getEntryBytes(String relativePath) {
+        return inputStream.bytes
     }
 
-    long getLastModified() {
-        lastModified
+    @Override
+    InputStream getInputStream() {
+        _inputStream = _file.newInputStream()
+
+        return _gZIPInputStream = new GZIPInputStream(_inputStream)
     }
 
-    byte[] getBytes() {
-        _file.withInputStream {
-            stream ->
-                new GZIPInputStream(stream).withCloseable {
-                    gzStream -> gzStream.getBytes()
-                }
-        } as byte[]
+    @Override
+    void closeStream() {
+        _gZIPInputStream.close()
+        _inputStream.close()
     }
 
 }
