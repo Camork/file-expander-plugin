@@ -1,11 +1,11 @@
 package com.github.camork.filesystem.gz
 
 import com.github.camork.filesystem.IArchiveFile
+import com.github.camork.filesystem.tar.TarGzFile
 import com.github.camork.util.ArchiveUtils
 import com.github.camork.util.EntryInfo
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 import org.apache.commons.compress.compressors.gzip.GzipUtils
-
-import java.util.zip.GZIPInputStream
 
 /**
  * @author Charles Wu
@@ -14,23 +14,34 @@ class GZFile implements IArchiveFile {
 
     private final File _file
 
-    private final String _name
+    private String _name
 
     private BufferedInputStream _inputStream
 
-    private GZIPInputStream _gZIPInputStream
+    private GzipCompressorInputStream _gZIPInputStream
+
+    private TarGzFile _tarGzFile
 
     GZFile(File file) {
         _file = file
 
-        _name = GzipUtils.getUncompressedFilename(file.getName())
+        if (_file.name.endsWith(".tar.gz")) {
+            _tarGzFile = new TarGzFile(_file)
+        }
+        else {
+            _name = GzipUtils.getUncompressedFilename(file.getName())
+        }
     }
 
     @Override
     Map<String, ?> createEntriesInfoMap() {
+        if (_tarGzFile != null) {
+            return _tarGzFile.createEntriesInfoMap()
+        }
+
         Map entries = [:]
 
-        def root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
+        EntryInfo root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
         entries.put('', root)
         entries.put(_name, new EntryInfo(_name, false, _file.length(), _file.lastModified(), root))
 
@@ -39,20 +50,28 @@ class GZFile implements IArchiveFile {
 
     @Override
     byte[] getEntryBytes(String relativePath) {
+        if (_tarGzFile != null) {
+            return _tarGzFile.getEntryBytes(relativePath)
+        }
+
         return inputStream.bytes
     }
 
     @Override
     InputStream getInputStream() {
+        if (_tarGzFile != null) {
+            return _tarGzFile.inputStream
+        }
+
         _inputStream = _file.newInputStream()
 
-        return _gZIPInputStream = new GZIPInputStream(_inputStream)
+        return _gZIPInputStream = new GzipCompressorInputStream(_inputStream)
     }
 
     @Override
-    void closeStream() {
-        _gZIPInputStream.close()
-        _inputStream.close()
+    void close() {
+        _gZIPInputStream?.close()
+        _inputStream?.close()
     }
 
 }
