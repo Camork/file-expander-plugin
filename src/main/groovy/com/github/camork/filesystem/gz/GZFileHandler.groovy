@@ -33,7 +33,7 @@ class GZFileHandler extends ArchiveHandlerBase<GZFile> {
 
         @Override
         protected void disposeAccessor(@NotNull GZFile fileAccessor) throws IOException {
-            fileAccessor.closeStream()
+            fileAccessor.close()
         }
 
     }

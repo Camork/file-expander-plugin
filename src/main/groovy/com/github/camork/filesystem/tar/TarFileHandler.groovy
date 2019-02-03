@@ -33,7 +33,7 @@ class TarFileHandler extends ArchiveHandlerBase<TarFile> {
 
         @Override
         protected void disposeAccessor(@NotNull TarFile fileAccessor) throws IOException {
-            fileAccessor.closeStream()
+            fileAccessor.close()
         }
 
     }

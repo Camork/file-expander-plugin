@@ -2,6 +2,7 @@ package com.github.camork.filesystem.tar
 
 import com.github.camork.filesystem.IArchiveFile
 import com.github.camork.util.ArchiveUtils
+import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.archivers.ArchiveEntry
 import org.apache.commons.compress.archivers.ArchiveInputStream
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
@@ -11,11 +12,11 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
  */
 class TarFile implements IArchiveFile {
 
-    private final File _file
+    protected final File _file
 
-    private FileInputStream _fileInputStream
+    protected FileInputStream _fileInputStream
 
-    private Map<String, ArchiveEntry> entries
+    protected Map<String, ArchiveEntry> entries
 
     TarFile(File file) {
         _file = file
@@ -43,7 +44,7 @@ class TarFile implements IArchiveFile {
     }
 
     @Override
-    void closeStream() {
+    void close() {
         _fileInputStream?.close()
     }
 
