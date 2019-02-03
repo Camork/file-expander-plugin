@@ -4,9 +4,18 @@
     <vendor email="camork1@gmail.com" url="https://github.com/camork/file-expander-plugin">Charles Wu</vendor>
 
     <description>
-    <![CDATA[<p>
-		This plugin can explore archive-based file in project view
-	</p>
+    <![CDATA[
+    <h1>File Expander</h1>
+    <br/>
+    <p>This plugin can explore archive-based file in project view</p>
+    <br/>
+    <p>Browse archive-based file in Intellij project view</p>
+    <br/>
+	<p>Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz</p>
+	<br/>
+	<p><img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot1.jpg"/></p>
+	<br/>
+	<a href="https://github.com/camork/file-expander-plugin">GitHub Page</a>
 	]]>
     </description>
 
