@@ -32,7 +32,7 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
                 if (fileType == ArchiveFileType.INSTANCE) {
 
-                    VirtualFile jarFile = JarFileSystem.getInstance().getJarRootForLocalFile(it.virtualFile)
+                    VirtualFile jarFile = JarFileSystem.getInstance().getRootByLocal(it.virtualFile)
 
                     if (jarFile != null) {
                         final PsiManager psiManager = PsiManager.getInstance(parent.project)
@@ -72,4 +72,5 @@ class ArchiveTreeProvider implements TreeStructureProvider {
             return it
         }
     }
+
 }

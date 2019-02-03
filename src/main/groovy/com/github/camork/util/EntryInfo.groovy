@@ -7,10 +7,11 @@ import org.jetbrains.annotations.Nullable
 /**
  * @author Charles Wu
  *
- * Use for wipe the warning about access to 'EntryInfo'
+ * Place-holder class to access'EntryInfo'
  */
 class EntryInfo extends ArchiveHandler.EntryInfo {
-    EntryInfo(@NotNull CharSequence shortName, boolean isDirectory, long length, long timestamp, @Nullable ArchiveHandler.EntryInfo parent) {
+    EntryInfo(@NotNull CharSequence shortName, boolean isDirectory,
+              long length, long timestamp, @Nullable ArchiveHandler.EntryInfo parent) {
         super(shortName, isDirectory, length, timestamp, parent)
     }
 }

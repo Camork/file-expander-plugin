@@ -30,7 +30,7 @@ class GZFile implements IArchiveFile {
     Map<String, ?> createEntriesInfoMap() {
         Map entries = [:]
 
-        def root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
+        EntryInfo root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
         entries.put('', root)
         entries.put(_name, new EntryInfo(_name, false, _file.length(), _file.lastModified(), root))
 

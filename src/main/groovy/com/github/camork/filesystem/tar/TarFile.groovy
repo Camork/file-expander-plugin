@@ -18,12 +18,11 @@ class TarFile implements IArchiveFile {
     private Map<String, ArchiveEntry> entries
 
     TarFile(File file) {
-        this._file = file
-        assert file.name.endsWith('.tar')
+        _file = file
     }
 
     @Override
-    Map<String, ?> createEntriesInfoMap() {
+    Map<String, EntryInfo> createEntriesInfoMap() {
         return inputStream.withCloseable {
             ArchiveUtils.buildEntryMap(calculateEntries())
         }
