@@ -19,6 +19,8 @@
 	]]>
     </description>
 
+    <depends>com.intellij.modules.lang</depends>
+
     <extensions defaultExtensionNs="com.intellij">
         <treeStructureProvider implementation="com.github.camork.extensions.ArchiveTreeProvider"/>
         <fileTypeFactory implementation="com.github.camork.filesystem.ArchiveFileTypeFactory"/>
