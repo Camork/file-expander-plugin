@@ -1,4 +1,7 @@
 # File Expander
+[![Latest release](https://img.shields.io/jetbrains/plugin/v/11940.svg?colorB=blue&label=File%20Expander&style=popout)](https://plugins.jetbrains.com/plugin/11940-file-expander)
+[![Latest release](https://img.shields.io/jetbrains/plugin/d/11940.svg?colorB=brightgreen&style=popout)](https://plugins.jetbrains.com/plugin/11940-file-expander)
+
 A Intellij plugin that can explore archive-based file in project view
 
 ## Building from source
