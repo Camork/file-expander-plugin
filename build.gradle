@@ -22,3 +22,8 @@ dependencies {
 intellij {
     version 'IC-2018.3.2'
 }
+
+patchPluginXml {
+    sinceBuild "182"
+    untilBuild ""
+}
