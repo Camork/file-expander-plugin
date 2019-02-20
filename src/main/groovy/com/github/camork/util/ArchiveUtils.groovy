@@ -3,7 +3,6 @@ package com.github.camork.util
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.Pair
 import com.intellij.openapi.util.text.StringUtil
-import com.intellij.openapi.vfs.impl.ArchiveHandler
 import com.intellij.util.text.ByteArrayCharSequence
 import org.apache.commons.compress.archivers.ArchiveEntry
 import org.apache.commons.compress.archivers.ArchiveInputStream
