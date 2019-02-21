@@ -30,6 +30,9 @@ abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler
         return canonicalPathToFile
     }
 
+    /**
+     * Use a FileAccessorCache to avoid the expensive explore
+     */
     abstract FileAccessorCache<ArchiveHandlerBase, T> getFileAccessor()
 
     @NotNull

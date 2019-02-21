@@ -22,6 +22,9 @@ class GZFile implements IArchiveFile {
 
     private TarGzFile _tarGzFile
 
+    /**
+     * If it's a tar.gz file, delegate to {@link TarGzFile} to handle all
+     */
     GZFile(File file) {
         _file = file
 
@@ -41,7 +44,8 @@ class GZFile implements IArchiveFile {
 
         Map entries = [:]
 
-        EntryInfo root = new EntryInfo('', true, ArchiveUtils.DEFAULT_LENGTH, ArchiveUtils.DEFAULT_TIMESTAMP, null)
+        EntryInfo root = ArchiveUtils.createRootEntry()
+
         entries.put('', root)
         entries.put(_name, new EntryInfo(_name, false, _file.length(), _file.lastModified(), root))
 

@@ -60,8 +60,8 @@ class ArchiveUtils {
      * @return
      */
     static EntryInfo getOrCreate(@NotNull ArchiveEntry entry,
-                                                @NotNull Map<String, EntryInfo> map,
-                                                @NotNull Map<String, ArchiveEntry> entries) {
+                                 @NotNull Map<String, EntryInfo> map,
+                                 @NotNull Map<String, ArchiveEntry> entries) {
         boolean isDirectory = entry.isDirectory()
         String entryName = entry.getName()
         if (StringUtil.endsWithChar(entryName, '/' as char)) {
@@ -87,8 +87,8 @@ class ArchiveUtils {
 
     @NotNull
     static EntryInfo getOrCreate(@NotNull String entryName,
-                                                @NotNull Map<String, EntryInfo> map,
-                                                @NotNull Map<String, ArchiveEntry> entries) {
+                                 @NotNull Map<String, EntryInfo> map,
+                                 @NotNull Map<String, ArchiveEntry> entries) {
         EntryInfo info = map.get(entryName)
 
         if (info == null) {
@@ -131,12 +131,12 @@ class ArchiveUtils {
 
     @NotNull
     private static EntryInfo store(@NotNull Map<String, EntryInfo> map,
-                                                  @Nullable EntryInfo parentInfo,
-                                                  @NotNull CharSequence shortName,
-                                                  boolean isDirectory,
-                                                  long size,
-                                                  long time,
-                                                  @NotNull String entryName) {
+                                   @Nullable EntryInfo parentInfo,
+                                   @NotNull CharSequence shortName,
+                                   boolean isDirectory,
+                                   long size,
+                                   long time,
+                                   @NotNull String entryName) {
         CharSequence sequence = shortName instanceof ByteArrayCharSequence ? shortName : ByteArrayCharSequence.convertToBytesIfPossible(shortName)
         EntryInfo info = new EntryInfo(sequence, isDirectory, size, time, parentInfo)
         map.put(entryName, info)

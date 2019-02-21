@@ -18,7 +18,8 @@ class ArchiveBasedPsiNode extends PsiDirectoryNode {
 
     private final VirtualFile _archiveFile
 
-    ArchiveBasedPsiNode(Project project, @NotNull PsiDirectory value, VirtualFile jarFile, ViewSettings viewSettings) {
+    ArchiveBasedPsiNode(Project project, @NotNull PsiDirectory value,
+                        VirtualFile jarFile, ViewSettings viewSettings) {
         super(project, value, viewSettings)
         _archiveFile = jarFile
     }
