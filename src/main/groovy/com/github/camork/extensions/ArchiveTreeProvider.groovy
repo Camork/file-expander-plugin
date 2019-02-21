@@ -19,6 +19,8 @@ import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiManager
+import com.intellij.psi.impl.PsiManagerImpl
+import com.intellij.psi.impl.file.PsiDirectoryImpl
 import org.jetbrains.annotations.NotNull
 
 import java.nio.file.Files
@@ -43,9 +45,11 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                     return it
                 }
 
+                boolean isNestedFile = false
+
                 // copy the nested file into temporary folder if it should be.
                 if (ArchiveBasedFileSystem.isNestedFile(treeNodeFile.path)) {
-                    File targetFile = CoreUtil.getTempFilePath(project, treeNodeFile).toFile()
+                    File targetFile = CoreUtil.getTempFilePath(treeNodeFile).toFile()
 
                     if (!targetFile.exists()) {
                         targetFile.parentFile.mkdirs()
@@ -57,6 +61,7 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
                     if (targetVf != null) {
                         treeNodeFile = targetVf
+                        isNestedFile = true
                     }
                 }
 
@@ -77,7 +82,13 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
                 if (archiveFile != null) {
                     final PsiManager psiManager = PsiManager.getInstance(project)
-                    final PsiDirectory psiDir = psiManager.findDirectory(archiveFile)
+                    final PsiDirectory psiDir
+                    if (isNestedFile) {
+                        psiDir = new PsiDirectoryImpl(psiManager as PsiManagerImpl, archiveFile)
+                    }
+                    else {
+                        psiDir = psiManager.findDirectory(archiveFile)
+                    }
 
                     return psiDir != null
                             ? new ArchiveBasedPsiNode(project, psiDir, archiveFile, settings)

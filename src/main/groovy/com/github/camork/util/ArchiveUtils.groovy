@@ -125,6 +125,11 @@ class ArchiveUtils {
     }
 
     @NotNull
+    static EntryInfo createRootEntry() {
+        return new EntryInfo('', true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
+    }
+
+    @NotNull
     private static EntryInfo store(@NotNull Map<String, EntryInfo> map,
                                                   @Nullable EntryInfo parentInfo,
                                                   @NotNull CharSequence shortName,
@@ -144,11 +149,6 @@ class ArchiveUtils {
         String parentName = p > 0 ? entryName.substring(0, p) : ''
         String shortName = p > 0 ? entryName.substring(p + 1) : entryName
         return Pair.create(parentName, shortName)
-    }
-
-    @NotNull
-    private static EntryInfo createRootEntry() {
-        return new EntryInfo('', true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
     }
 
 }
