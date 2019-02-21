@@ -1,6 +1,6 @@
 # File Expander
 [![Latest release](https://img.shields.io/jetbrains/plugin/v/11940.svg?colorB=blue&label=File%20Expander&style=popout)](https://plugins.jetbrains.com/plugin/11940-file-expander)
-[![Latest release](https://img.shields.io/jetbrains/plugin/d/11940.svg?colorB=brightgreen&style=popout)](https://plugins.jetbrains.com/plugin/11940-file-expander)
+[![Latest release](https://img.shields.io/jetbrains/plugin/d/11940-file-expander.svg?color=brightgreen&label=Downloads&style=popout)](https://plugins.jetbrains.com/plugin/11940-file-expander)
 
 A Intellij plugin that can explore archive-based file in project view
 
@@ -19,17 +19,17 @@ build/distributions/fileExpander-<version>.zip
 
 You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd> point to newly built zip file
 
+###### Note: Require build version since from 182.* (2018.2).
+
 ## Key features
 
 ### Browse archive-based file in Intellij project view
 
-Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz
+* Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz
 
-<img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot1.jpg">
+* Support nested archive file.
 
-## Known issue:
-
-* Unable to expand nested archive file.
+<img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot.png" width="650">
 
 ## Contribute
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.camork'
-version '0.2'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -26,4 +26,8 @@ intellij {
 patchPluginXml {
     sinceBuild "182"
     untilBuild ""
+}
+
+publishPlugin {
+    token ""
 }

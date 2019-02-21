@@ -11,13 +11,31 @@
     <br/>
     <p>Browse archive-based file in Intellij project view</p>
     <br/>
-	<p>Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz</p>
+    <ul>
+		<li>Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz</li>
+		<li>Support nested archive file</li>
+	</ul>
 	<br/>
-	<p><img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot1.jpg"/></p>
+	<p><img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot.png"/></p>
 	<br/>
 	<a href="https://github.com/camork/file-expander-plugin">GitHub Page</a>
 	]]>
     </description>
+
+    <change-notes>
+    <![CDATA[
+    <p>
+		See for all changes: <a href="https://github.com/camork/file-expander-plugin/commits">GitHub Commits</a>
+	</p>
+	<p>
+		<ul>
+			<li>1.0</li>
+			<ul>
+				<li>Nested archive file support!</li>
+			</ul>
+		</ul>
+	</p>]]>
+    </change-notes>
 
     <depends>com.intellij.modules.lang</depends>
 
