@@ -1,6 +1,8 @@
 package com.github.camork.filesystem.gz
 
 import com.github.camork.filesystem.ArchiveBasedFileSystem
+import com.github.camork.filesystem.tar.TarGzFileType
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.FileTypeRegistry
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
@@ -26,7 +28,9 @@ abstract class GZFileSystem extends ArchiveBasedFileSystem {
 
     @Override
     protected boolean isCorrectFileType(@NotNull VirtualFile local) {
-        return FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == GZFileType.INSTANCE
+        FileType fileType = FileTypeRegistry.getInstance().getFileTypeByFileName(local.name)
+
+        return fileType == GZFileType.INSTANCE || fileType == TarGzFileType.INSTANCE
     }
 
 }

@@ -25,15 +25,22 @@ You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Ins
 
 ### Browse archive-based file in Intellij project view
 
-* Supported file type: zip-based type (zip , jar , war , etc), tar , gz , tar.gz
+##### Supported file type: 
+* zip-based type (.zip .jar .war etc)
 
-* Support nested archive file.
+* .gz
+
+* .tar
+
+* .tar.gz , .tgz
+
+* nested archive file.
 
 <img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot.png" width="650">
 
 ## Contribute
 
-Any issues, feature requirement and contributions are welcome
+Any issues, feature requirement and contributions are welcome!
 
 ## License
 

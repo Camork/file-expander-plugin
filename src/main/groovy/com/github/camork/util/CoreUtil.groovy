@@ -2,6 +2,7 @@ package com.github.camork.util
 
 import com.github.camork.filesystem.gz.GZFileSystem
 import com.github.camork.filesystem.tar.TarFileSystem
+import com.github.camork.filesystem.tar.TarGzFileType
 import com.google.common.collect.ImmutableSet
 import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.VirtualFile
@@ -25,6 +26,7 @@ class CoreUtil {
             DOT + JarFileSystem.PROTOCOL,
             DOT + TarFileSystem.PROTOCOL,
             DOT + GZFileSystem.PROTOCOL,
+            DOT + TarGzFileType.INSTANCE.defaultExtension
     )
 
     /**

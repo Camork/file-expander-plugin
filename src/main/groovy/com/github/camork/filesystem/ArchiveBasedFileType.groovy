@@ -1,5 +1,6 @@
 package com.github.camork.filesystem
 
+import com.github.camork.util.CoreUtil
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.vfs.VirtualFile
@@ -23,6 +24,11 @@ abstract class ArchiveBasedFileType implements FileType {
     }
 
     @Override
+    String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
+        null
+    }
+
+    @Override
     boolean isBinary() {
         true
     }
@@ -30,11 +36,6 @@ abstract class ArchiveBasedFileType implements FileType {
     @Override
     boolean isReadOnly() {
         false
-    }
-
-    @Override
-    String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
-        null
     }
 
 }

@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.camork'
-version '1.0'
+version '1.1'
 
 sourceCompatibility = 1.8
 
@@ -21,6 +21,10 @@ dependencies {
 
 intellij {
     version 'IC-2018.3.2'
+}
+
+runIde {
+    jvmArgs "-Xmx1024m"
 }
 
 patchPluginXml {

@@ -5,6 +5,8 @@ import com.github.camork.filesystem.gz.GZFileSystem
 import com.github.camork.filesystem.gz.GZFileType
 import com.github.camork.filesystem.tar.TarFileSystem
 import com.github.camork.filesystem.tar.TarFileType
+import com.github.camork.filesystem.tar.TarGzFile
+import com.github.camork.filesystem.tar.TarGzFileType
 import com.github.camork.nodes.ArchiveBasedPsiNode
 import com.github.camork.util.CoreUtil
 import com.intellij.ide.highlighter.ArchiveFileType
@@ -74,6 +76,7 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                         archiveFile = JarFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         break
                     case GZFileType.INSTANCE:
+                    case TarGzFileType.INSTANCE:
                         archiveFile = GZFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         break
                     case TarFileType.INSTANCE:
