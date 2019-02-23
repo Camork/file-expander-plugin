@@ -23,6 +23,10 @@ intellij {
     version 'IC-2018.3.2'
 }
 
+runIde {
+    jvmArgs "-Xmx1024m"
+}
+
 patchPluginXml {
     sinceBuild "182"
     untilBuild ""

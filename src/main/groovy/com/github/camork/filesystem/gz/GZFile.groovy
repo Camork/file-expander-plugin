@@ -2,7 +2,9 @@ package com.github.camork.filesystem.gz
 
 import com.github.camork.filesystem.IArchiveFile
 import com.github.camork.filesystem.tar.TarGzFile
+import com.github.camork.filesystem.tar.TarGzFileType
 import com.github.camork.util.ArchiveUtils
+import com.github.camork.util.CoreUtil
 import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
 import org.apache.commons.compress.compressors.gzip.GzipUtils
@@ -23,12 +25,13 @@ class GZFile implements IArchiveFile {
     private TarGzFile _tarGzFile
 
     /**
-     * If it's a tar.gz file, delegate to {@link TarGzFile} to handle all
+     * If it's a tar with gz based file, delegate to {@link TarGzFile} to handle all
      */
     GZFile(File file) {
         _file = file
 
-        if (_file.name.endsWith(".tar.gz")) {
+        String fileName = _file.name
+        if (fileName.endsWith(".tar.gz") || fileName.endsWith(CoreUtil.DOT + TarGzFileType.INSTANCE.defaultExtension)) {
             _tarGzFile = new TarGzFile(_file)
         }
         else {
