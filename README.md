@@ -19,7 +19,7 @@ build/distributions/fileExpander-<version>.zip
 
 You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd> point to newly built zip file
 
-###### Note: Require build version since from 182.* (2018.2).
+###### Note: Require build version from 182+ (2018.2).
 
 ## Key features
 

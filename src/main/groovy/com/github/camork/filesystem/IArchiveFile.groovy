@@ -3,7 +3,8 @@ package com.github.camork.filesystem
 import com.github.camork.util.EntryInfo
 
 /**
- * Base interface of a archive file if you want to implement
+ * The basic interface of a archive file,
+ * all customized archive types should implement it.
  *
  * @author Charles Wu
  */
