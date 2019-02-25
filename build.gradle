@@ -28,7 +28,7 @@ runIde {
 }
 
 patchPluginXml {
-    sinceBuild "182"
+    sinceBuild "173"
     untilBuild ""
 }
 
