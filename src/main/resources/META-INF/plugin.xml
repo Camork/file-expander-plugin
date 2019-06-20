@@ -17,6 +17,7 @@
         <li>.gz</li>
         <li>.tar</li>
         <li>.tar.gz and .tgz</li>
+        <li>.7z</li>
         <li>Nested archive file</li>
 	</ul>
 	<br/>
@@ -33,9 +34,9 @@
 	</p>
 	<p>
 		<ul>
-			<li>1.1</li>
+			<li>1.2</li>
 			<ul>
-				<li>support tgz extension!</li>
+				<li>support .7z archives</li>
 			</ul>
 		</ul>
 	</p>]]>
@@ -48,6 +49,7 @@
         <fileTypeFactory implementation="com.github.camork.filesystem.ArchiveFileTypeFactory"/>
         <virtualFileSystem key="gzip" implementationClass="com.github.camork.filesystem.gz.GZFileSystemImpl"/>
         <virtualFileSystem key="tar" implementationClass="com.github.camork.filesystem.tar.TarFileSystemImpl"/>
+        <virtualFileSystem key="7z" implementationClass="com.github.camork.filesystem.sevenzip.SevenZipFileSystemImpl"/>
     </extensions>
 
 </idea-plugin>

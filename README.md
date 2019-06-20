@@ -34,6 +34,8 @@ You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Ins
 
 * .tar.gz , .tgz
 
+* .7z
+
 * nested archive file.
 
 <img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot.png" width="650">

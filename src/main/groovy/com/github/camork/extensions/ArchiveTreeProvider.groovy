@@ -3,6 +3,8 @@ package com.github.camork.extensions
 import com.github.camork.filesystem.ArchiveBasedFileSystem
 import com.github.camork.filesystem.gz.GZFileSystem
 import com.github.camork.filesystem.gz.GZFileType
+import com.github.camork.filesystem.sevenzip.SevenZipFileSystem
+import com.github.camork.filesystem.sevenzip.SevenZipFileType
 import com.github.camork.filesystem.tar.TarFileSystem
 import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.filesystem.tar.TarGzFile
@@ -81,6 +83,10 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                         break
                     case TarFileType.INSTANCE:
                         archiveFile = TarFileSystem.getInstance().getRootByLocal(treeNodeFile)
+                        break
+                    case SevenZipFileType.INSTANCE:
+                        archiveFile = SevenZipFileSystem.getInstance().getRootByLocal(treeNodeFile)
+                        break
                 }
 
                 if (archiveFile != null) {

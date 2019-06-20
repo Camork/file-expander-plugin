@@ -6,6 +6,8 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.util.text.ByteArrayCharSequence
 import org.apache.commons.compress.archivers.ArchiveEntry
 import org.apache.commons.compress.archivers.ArchiveInputStream
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry
+import org.apache.commons.compress.archivers.sevenz.SevenZFile
 import org.apache.commons.compress.utils.IOUtils
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
@@ -30,6 +32,24 @@ class ArchiveUtils {
             IOUtils.copy(inputStream, outputStream)
 
             return outputStream.toByteArray()
+        }
+
+        return new byte[0]
+    }
+
+    static byte[] getEntryBytes(SevenZFile file, ArchiveEntry item) {
+        ArchiveEntry entry
+
+        while ((entry = file.getNextEntry()) != null) {
+            if (item.name != entry.name) {
+                continue
+            }
+
+            byte[] bytes = new byte[entry.getSize()]
+
+            file.read(bytes)
+
+            return bytes
         }
 
         return new byte[0]
@@ -105,7 +125,7 @@ class ArchiveUtils {
 
         if (!info.isDirectory) {
             Logger.getInstance(this.class).info("${entryName} should be a directory")
-            info = store(map, (EntryInfo)info.parent, info.shortName, true, info.length, info.timestamp, entryName)
+            info = store(map, (EntryInfo) info.parent, info.shortName, true, info.length, info.timestamp, entryName)
         }
 
         return info
@@ -120,6 +140,15 @@ class ArchiveUtils {
         while ((entry = input.getNextEntry()) != null) {
             map.put(entry.getName(), entry)
         }
+
+        return map
+    }
+
+    @NotNull
+    static Map<String, ArchiveEntry> calculateEntries(SevenZFile file) {
+        Map<String, ArchiveEntry> map = new LinkedHashMap<>()
+
+        file.getEntries().forEach({ map.put(it.getName(), it) })
 
         return map
     }

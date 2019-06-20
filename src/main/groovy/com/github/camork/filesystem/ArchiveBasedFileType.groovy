@@ -1,6 +1,5 @@
 package com.github.camork.filesystem
 
-import com.github.camork.util.CoreUtil
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.vfs.VirtualFile
