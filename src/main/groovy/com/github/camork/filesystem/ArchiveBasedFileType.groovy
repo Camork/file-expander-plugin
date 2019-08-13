@@ -14,7 +14,7 @@ abstract class ArchiveBasedFileType implements FileType {
 
     @Override
     String getDescription() {
-        null
+        getName() + " archive"
     }
 
     @Override
