@@ -7,6 +7,7 @@ group 'com.github.camork'
 version '1.2'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -15,12 +16,12 @@ repositories {
 configurations.testCompile.extendsFrom(configurations.compileOnly)
 
 dependencies {
-    compileOnly 'org.codehaus.groovy:groovy-all:2.4.15'
+    compileOnly 'org.codehaus.groovy:groovy-all:2.4.17'
     compileOnly 'org.apache.commons:commons-compress:1.18'
 }
 
 intellij {
-    version 'IC-2019.1.1'
+    version 'IC-2019.2.3'
 }
 
 runIde {
