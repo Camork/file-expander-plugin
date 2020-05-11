@@ -52,4 +52,9 @@ class ArchiveBasedPsiNode extends PsiDirectoryNode {
         return children
     }
 
+    @Override
+    boolean isValid() {
+        return true
+    }
+
 }

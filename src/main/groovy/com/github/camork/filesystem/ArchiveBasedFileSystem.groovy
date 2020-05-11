@@ -79,6 +79,6 @@ abstract class ArchiveBasedFileSystem extends ArchiveFileSystem {
     @Override
     String normalize(@NotNull String path) {
         int p = path.indexOf(SEPARATOR)
-        return p > 0 ? FileUtil.normalize(path.substring(0, p)) + path.substring(p) : super.normalize(path)
+        return p > 0 ? FileUtil.normalize(path.substring(0, p)) + path.substring(p) : path
     }
 }

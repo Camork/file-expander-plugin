@@ -12,12 +12,12 @@ class GZFileType extends ArchiveBasedFileType {
 
     @Override
     String getName() {
-        'GZIP'
+        return 'GZIP'
     }
 
     @Override
     String getDefaultExtension() {
-        'gz'
+        return 'gz'
     }
 
 }
