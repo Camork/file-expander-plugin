@@ -1,6 +1,7 @@
 package com.github.camork.extensions
 
 import com.github.camork.filesystem.ArchiveBasedFileSystem
+import com.github.camork.filesystem.MyArchiveFileType
 import com.github.camork.filesystem.gz.GZFileSystem
 import com.github.camork.filesystem.gz.GZFileType
 import com.github.camork.filesystem.sevenzip.SevenZipFileSystem
@@ -8,6 +9,7 @@ import com.github.camork.filesystem.sevenzip.SevenZipFileType
 import com.github.camork.filesystem.tar.TarFileSystem
 import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.filesystem.tar.TarGzFileType
+import com.github.camork.filesystem.zip.ZipFileSystem
 import com.github.camork.nodes.ArchiveBasedPsiNode
 import com.github.camork.util.CoreUtil
 import com.intellij.ide.highlighter.ArchiveFileType
@@ -34,6 +36,8 @@ import java.nio.file.Files
 class ArchiveTreeProvider implements TreeStructureProvider {
 
     private static String[] archiveExtensions = ["zip", "jar", "war", "ear", "swc", "ane", "egg", "apk"]
+
+    private static String[] archiveExtendExtensions = ["epc"]
 
     @NotNull
     @Override
@@ -80,6 +84,9 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                         if (extension in archiveExtensions) {
                             archiveFile = JarFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         }
+                        break
+                    case MyArchiveFileType.INSTANCE:
+                        archiveFile = ZipFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         break
                     case GZFileType.INSTANCE:
                     case TarGzFileType.INSTANCE:
