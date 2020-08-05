@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.camork'
-version '1.4'
+version '1.5'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -21,11 +21,12 @@ dependencies {
 }
 
 intellij {
-    version 'IC-2020.1'
+    version 'IC-2020.2'
 }
 
 runIde {
     jvmArgs "-Xmx512m"
+    jbrVersion = ""
 }
 
 patchPluginXml {
