@@ -26,7 +26,7 @@ You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Ins
 ### Browse archive-based file in Intellij project view
 
 ##### Supported file type: 
-* zip-based type (.zip .jar .war etc)
+* zip-based type (.zip .jar .war .epc etc)
 
 * .gz
 
