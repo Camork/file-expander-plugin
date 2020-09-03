@@ -33,7 +33,9 @@ class TarFile implements IArchiveFile {
     byte[] getEntryBytes(String relativePath) {
         ArchiveEntry item = calculateEntries().get(relativePath)
 
-        return ArchiveUtils.getEntryBytes(inputStream, item)
+        return inputStream.withCloseable {
+            ArchiveUtils.getEntryBytes(it, item)
+        }
     }
 
     @Override

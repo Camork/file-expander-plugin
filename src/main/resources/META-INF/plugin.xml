@@ -34,9 +34,9 @@
 	</p>
 	<p>
 		<ul>
-			<li>1.5</li>
+			<li>1.6</li>
 			<ul>
-				<li>Support .epc extension</li>
+				<li>Bug Fix: unlocking resource when leaving</li>
 			</ul>
 		</ul>
 	</p>]]>

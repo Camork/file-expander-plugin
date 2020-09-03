@@ -7,7 +7,6 @@ import com.github.camork.util.ArchiveUtils
 import com.github.camork.util.CoreUtil
 import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
-import org.apache.commons.compress.compressors.gzip.GzipUtils
 
 /**
  * @author Charles Wu
@@ -16,7 +15,7 @@ class GZFile implements IArchiveFile {
 
     private final File _file
 
-    private String _name
+    private String _innerName
 
     private BufferedInputStream _inputStream
 
@@ -34,9 +33,6 @@ class GZFile implements IArchiveFile {
         if (fileName.endsWith(".tar.gz") || fileName.endsWith(CoreUtil.DOT + TarGzFileType.INSTANCE.defaultExtension)) {
             _tarGzFile = new TarGzFile(_file)
         }
-        else {
-            _name = GzipUtils.getUncompressedFilename(file.getName())
-        }
     }
 
     @Override
@@ -45,12 +41,15 @@ class GZFile implements IArchiveFile {
             return _tarGzFile.createEntriesInfoMap()
         }
 
+        (inputStream as GzipCompressorInputStream).withCloseable {
+            _innerName = it.metaData.filename
+        }
         Map entries = [:]
 
         EntryInfo root = ArchiveUtils.createRootEntry()
 
         entries.put('', root)
-        entries.put(_name, new EntryInfo(_name, false, _file.length(), _file.lastModified(), root))
+        entries.put(_innerName, new EntryInfo(_innerName, false, _file.length(), _file.lastModified(), root))
 
         return entries
     }
@@ -61,7 +60,9 @@ class GZFile implements IArchiveFile {
             return _tarGzFile.getEntryBytes(relativePath)
         }
 
-        return inputStream.bytes
+        return inputStream.withCloseable {
+            it.bytes
+        }
     }
 
     @Override

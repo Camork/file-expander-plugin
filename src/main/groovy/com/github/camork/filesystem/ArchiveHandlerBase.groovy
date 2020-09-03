@@ -42,7 +42,9 @@ abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler
 
     @Override
     protected Map<String, ?> createEntriesMap() throws IOException {
-        return acquireFileHandle().get().createEntriesInfoMap()
+        return acquireFileHandle().withCloseable {
+            it.get().createEntriesInfoMap()
+        }
     }
 
     @Override
@@ -88,6 +90,7 @@ abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler
     @Override
     protected void clearCaches() {
         fileAccessor.remove(this)
+        fileAccessor.clear()
         super.clearCaches()
     }
 
