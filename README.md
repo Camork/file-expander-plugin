@@ -38,11 +38,21 @@ You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Ins
 
 * nested archive file.
 
-<img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/screenshots/screenshot.png" width="650">
+<img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/images/screenshot.png" width="650">
 
 ## Contribute
 
 Any issues, feature requirement and contributions are welcome!
+
+## Sponsors
+
+<table>
+      <td>
+        <a href="https://www.jetbrains.com/?from=file-expander-plugin" target="_blank">
+            <img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/images/jetbrains.svg" alt="JetBrains" title="Development powered by JetBrains.">
+        </a>
+      </td>
+</table>
 
 ## License
 
