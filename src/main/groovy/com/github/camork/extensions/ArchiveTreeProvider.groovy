@@ -102,7 +102,7 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
                 if (archiveFile != null) {
                     final PsiManager psiManager = PsiManager.getInstance(project)
-                    final PsiDirectory psiDir
+                    PsiDirectory psiDir
                     if (isNestedFile) {
                         psiDir = new PsiDirectoryImpl(psiManager as PsiManagerImpl, archiveFile)
                     }

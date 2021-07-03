@@ -3,3 +3,5 @@ build/*
 .idea/*
 out/*
 !gradle-wrapper.jar
+.DS_Store
+gradle.properties
