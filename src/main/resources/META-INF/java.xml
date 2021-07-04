@@ -1,0 +1,8 @@
+<idea-plugin>
+	<actions>
+		<action id="com.github.camork.action.DecompileJarAction" class="com.github.camork.action.DecompileJarAction"
+				text="Decompile Jar" description="Decompile the classes jar">
+			<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+		</action>
+	</actions>
+</idea-plugin>

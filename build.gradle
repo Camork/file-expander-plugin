@@ -24,6 +24,7 @@ dependencies {
 }
 
 intellij {
+    plugins = ['java']
     version 'IC-2021.1.3'
 }
 

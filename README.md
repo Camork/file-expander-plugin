@@ -40,6 +40,9 @@ You can install this from <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Ins
 
 <img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/images/screenshot.png" width="650">
 
+### Decompile classes jar to sources jar
+<img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/images/decompile.png" width="600">
+
 ## Contribute
 
 Any issues, feature requirement and contributions are welcome!
