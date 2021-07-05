@@ -35,7 +35,7 @@ import java.nio.file.Files
  */
 class ArchiveTreeProvider implements TreeStructureProvider {
 
-    private static String[] archiveExtensions = ["zip", "jar", "war", "ear", "swc", "ane", "egg", "apk"]
+    private static String[] archiveExtensions = ["zip", "jar", "war", "ear", "swc", "ane", "egg", "apk", "aar"]
 
     private static String[] archiveExtendExtensions = ["epc"]
 
