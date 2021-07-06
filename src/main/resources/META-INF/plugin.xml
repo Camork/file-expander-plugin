@@ -20,6 +20,7 @@
         <li>.7z</li>
         <li>Nested archive file</li>
 	</ul>
+	<p>Support decompile jar file</p>
 	<br/>
 	<p><img src="https://raw.githubusercontent.com/Camork/file-expander-plugin/master/images/screenshot.png" width="750"/></p>
 	<br/>
@@ -34,9 +35,10 @@
 	</p>
 	<p>
 		<ul>
-			<li>1.6</li>
+			<li>1.7</li>
 			<ul>
-				<li>Bug Fix: unlocking resource when leaving</li>
+				<li>Support decompile jar file</li>
+				<li>Support AAR File</li>
 			</ul>
 		</ul>
 	</p>]]>
