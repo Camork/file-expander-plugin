@@ -1,5 +1,6 @@
 package com.github.camork.nodes
 
+import com.google.common.base.MoreObjects
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
@@ -57,4 +58,11 @@ class ArchiveBasedPsiNode extends PsiDirectoryNode {
         return true
     }
 
+
+    @Override
+    String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("_archiveFile", _archiveFile)
+                .toString()
+    }
 }
