@@ -88,7 +88,7 @@ abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler
     }
 
     @Override
-    protected void clearCaches() {
+    void clearCaches() {
         fileAccessor.remove(this)
         fileAccessor.clear()
         super.clearCaches()

@@ -35,10 +35,9 @@
 	</p>
 	<p>
 		<ul>
-			<li>1.7</li>
+			<li>2.0</li>
 			<ul>
-				<li>Support decompile jar file</li>
-				<li>Support AAR File</li>
+				<li>Fix copy/paste bug</li>
 			</ul>
 		</ul>
 	</p>]]>
