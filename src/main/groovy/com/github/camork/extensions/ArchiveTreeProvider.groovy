@@ -11,6 +11,7 @@ import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.filesystem.tar.TarGzFileType
 import com.github.camork.filesystem.zip.ZipFileSystem
 import com.github.camork.nodes.ArchiveBasedPsiNode
+import com.github.camork.nodes.PsiDirectoryNodeWrapper
 import com.github.camork.util.CoreUtil
 import com.intellij.ide.highlighter.ArchiveFileType
 import com.intellij.ide.projectView.TreeStructureProvider
@@ -23,6 +24,7 @@ import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiManagerImpl
 import com.intellij.psi.impl.file.PsiDirectoryImpl
@@ -101,18 +103,7 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                 }
 
                 if (archiveFile != null) {
-                    final PsiManager psiManager = PsiManager.getInstance(project)
-                    PsiDirectory psiDir
-                    if (isNestedFile) {
-                        psiDir = new PsiDirectoryImpl(psiManager as PsiManagerImpl, archiveFile)
-                    }
-                    else {
-                        psiDir = psiManager.findDirectory(archiveFile)
-                    }
-
-                    return psiDir != null
-                            ? new ArchiveBasedPsiNode(project, psiDir, archiveFile, settings)
-                            : it
+                    return new PsiDirectoryNodeWrapper(project, it.getValue(), settings, isNestedFile, archiveFile)
                 }
             }
 
