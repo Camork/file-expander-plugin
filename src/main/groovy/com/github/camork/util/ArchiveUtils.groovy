@@ -3,10 +3,8 @@ package com.github.camork.util
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.Pair
 import com.intellij.openapi.util.text.StringUtil
-import com.intellij.util.text.ByteArrayCharSequence
 import org.apache.commons.compress.archivers.ArchiveEntry
 import org.apache.commons.compress.archivers.ArchiveInputStream
-import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry
 import org.apache.commons.compress.archivers.sevenz.SevenZFile
 import org.apache.commons.compress.utils.IOUtils
 import org.jetbrains.annotations.NotNull
@@ -125,7 +123,7 @@ class ArchiveUtils {
 
         if (!info.isDirectory) {
             Logger.getInstance(this.class).info("${entryName} should be a directory")
-            info = store(map, (EntryInfo) info.parent, info.shortName, true, info.length, info.timestamp, entryName)
+            info = store(map, (EntryInfo) info.parent, info.shortName.toString(), true, info.length, info.timestamp, entryName)
         }
 
         return info
@@ -161,13 +159,12 @@ class ArchiveUtils {
     @NotNull
     private static EntryInfo store(@NotNull Map<String, EntryInfo> map,
                                    @Nullable EntryInfo parentInfo,
-                                   @NotNull CharSequence shortName,
+                                   @NotNull String shortName,
                                    boolean isDirectory,
                                    long size,
                                    long time,
                                    @NotNull String entryName) {
-        CharSequence sequence = shortName instanceof ByteArrayCharSequence ? shortName : ByteArrayCharSequence.convertToBytesIfPossible(shortName)
-        EntryInfo info = new EntryInfo(sequence, isDirectory, size, time, parentInfo)
+        EntryInfo info = new EntryInfo(shortName, isDirectory, size, time, parentInfo)
         map.put(entryName, info)
         return info
     }
