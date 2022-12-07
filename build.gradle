@@ -1,13 +1,13 @@
 plugins {
     id 'groovy'
-    id 'org.jetbrains.intellij' version '1.9.0'
+    id 'org.jetbrains.intellij' version '1.10.0'
 }
 
 group 'com.github.camork'
-version '2.0'
+version '2.1'
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
     maven {
@@ -19,12 +19,12 @@ repositories {
 configurations.testImplementation.extendsFrom(configurations.compileOnly)
 
 dependencies {
-    compileOnly 'org.codehaus.groovy:groovy-all:2.5.11'
-    compileOnly 'org.apache.commons:commons-compress:1.18'
+    compileOnly 'org.codehaus.groovy:groovy-all:3.0.13'
+    compileOnly 'org.apache.commons:commons-compress:1.21'
 }
 
 intellij {
-    version = "2021.1"
+    version = "2022.3"
     plugins = ['java']
     version project.version
 }
@@ -35,7 +35,7 @@ runIde {
 }
 
 patchPluginXml {
-    sinceBuild = "211"
+    sinceBuild = "223"
     untilBuild = ""
 }
 
