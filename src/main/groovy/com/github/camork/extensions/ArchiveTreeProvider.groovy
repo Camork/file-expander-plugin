@@ -10,7 +10,6 @@ import com.github.camork.filesystem.tar.TarFileSystem
 import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.filesystem.tar.TarGzFileType
 import com.github.camork.filesystem.zip.ZipFileSystem
-import com.github.camork.nodes.ArchiveBasedPsiNode
 import com.github.camork.nodes.PsiDirectoryNodeWrapper
 import com.github.camork.util.CoreUtil
 import com.intellij.ide.highlighter.ArchiveFileType
@@ -23,11 +22,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiDirectory
-import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiManager
-import com.intellij.psi.impl.PsiManagerImpl
-import com.intellij.psi.impl.file.PsiDirectoryImpl
 import org.jetbrains.annotations.NotNull
 
 import java.nio.file.Files

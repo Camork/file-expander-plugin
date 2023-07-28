@@ -6,7 +6,6 @@ import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.archivers.ArchiveEntry
 import org.apache.commons.compress.archivers.ArchiveInputStream
 import org.apache.commons.compress.archivers.sevenz.SevenZFile
-import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 
 /**
  * @author Charles Wu

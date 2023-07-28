@@ -7,9 +7,11 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.fileEditor.impl.LoadTextUtil
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
+import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.newvfs.ArchiveFileSystem
 import org.apache.commons.io.FilenameUtils
@@ -22,30 +24,29 @@ class DecompileJarAction extends AnAction {
 
     @Override
     void update(@NotNull AnActionEvent e) {
-        e.getPresentation().setEnabledAndVisible(
-                e.getData(PlatformDataKeys.VIRTUAL_FILE)?.getFileType() == ArchiveFileType.INSTANCE
-        )
+        def file = e.getData(PlatformDataKeys.VIRTUAL_FILE)
+        e.getPresentation().setEnabledAndVisible(file?.getFileType() == ArchiveFileType.INSTANCE && file.getExtension() == "jar")
     }
 
     @Override
     void actionPerformed(@NotNull AnActionEvent e) {
         def file = e.getData(PlatformDataKeys.VIRTUAL_FILE)
+        file = JarFileSystem.getInstance().getRootByLocal(file)
         def fileSystem = file.getFileSystem()
-        if (fileSystem instanceof ArchiveFileSystem) {
-            def localVf = fileSystem.getLocalByEntry(file)
-            def localFile = localVf.toNioPath()
 
-            ProgressManager.getInstance().run(new Task.Modal(e.getProject(), "Decompiling jar", true) {
+        def localVf = fileSystem.getLocalByEntry(file)
+        def localFile = localVf.toNioPath()
 
-                @Override
-                void run(@NotNull ProgressIndicator indicator) {
-                    Path.of(FilenameUtils.removeExtension(localFile.toString())).with {
-                        visit(it, file)
-                    }
-                    localVf.parent.refresh(false, true)
+        ProgressManager.getInstance().run(new Task.Modal(e.getProject(), "Decompiling jar", true) {
+
+            @Override
+            void run(@NotNull ProgressIndicator indicator) {
+                Path.of(FilenameUtils.removeExtension(localFile.toString())).with {
+                    visit(it, file)
                 }
-            })
-        }
+                localVf.parent.refresh(false, true)
+            }
+        })
     }
 
     void visit(Path dir, VirtualFile parent) {
