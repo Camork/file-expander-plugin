@@ -35,9 +35,10 @@
 	</p>
 	<p>
 		<ul>
-			<li>2.1</li>
+			<li>2.2</li>
 			<ul>
-				<li>Support IDEA 2022.3</li>
+				<li>Allowed to expand nested file if the file's type inside is added manually.
+				see https://github.com/Camork/file-expander-plugin/issues/33</li>
 			</ul>
 		</ul>
 	</p>]]>
