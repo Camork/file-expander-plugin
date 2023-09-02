@@ -9,6 +9,6 @@ public class MyArchiveFileType extends com.intellij.ide.highlighter.ArchiveFileT
     @NotNull
     @Override
     public String getName() {
-        return "ARCHIVE(extend)";
+        return "EXTEND ARCHIVE";
     }
 }

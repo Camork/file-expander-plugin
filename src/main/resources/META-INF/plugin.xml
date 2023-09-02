@@ -49,8 +49,8 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<treeStructureProvider implementation="com.github.camork.extensions.ArchiveTreeProvider"/>
-		<fileType name="ARCHIVE(extend)" implementationClass="com.github.camork.filesystem.MyArchiveFileType"
-				  fieldName="INSTANCE" extensions="epc"/>
+		<fileType name="EXTEND ARCHIVE" implementationClass="com.github.camork.filesystem.MyArchiveFileType"
+				  fieldName="INSTANCE" extensions="epc;whl"/>
 		<fileType name="GZIP" extensions="gz" implementationClass="com.github.camork.filesystem.gz.GZFileType"
 				  fieldName="INSTANCE"/>
 		<fileType name="TAR" extensions="tar" implementationClass="com.github.camork.filesystem.tar.TarFileType"

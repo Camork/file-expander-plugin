@@ -19,7 +19,6 @@ import com.intellij.ide.projectView.impl.nodes.PsiFileNode
 import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import org.jetbrains.annotations.NotNull
@@ -31,15 +30,11 @@ import java.nio.file.Files
  */
 class ArchiveTreeProvider implements TreeStructureProvider {
 
-    private static String[] archiveExtensions = ["zip", "jar", "war", "ear", "swc", "ane", "egg", "apk", "aar"]
-
-    private static String[] archiveExtendExtensions = ["epc"]
-
     @NotNull
     @Override
     Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
-                                        @NotNull Collection<AbstractTreeNode<?>> children,
-                                        ViewSettings settings) {
+                                           @NotNull Collection<AbstractTreeNode<?>> children,
+                                           ViewSettings settings) {
         return children.collect {
             if (it instanceof PsiFileNode && it.virtualFile?.isValid()) {
                 Project project = parent.project
@@ -76,11 +71,6 @@ class ArchiveTreeProvider implements TreeStructureProvider {
 
                 switch (fileType) {
                     case ArchiveFileType.INSTANCE:
-                        def extension = treeNodeFile.getExtension()
-                        if (extension in archiveExtensions) {
-                            archiveFile = JarFileSystem.getInstance().getRootByLocal(treeNodeFile)
-                        }
-                        break
                     case MyArchiveFileType.INSTANCE:
                         archiveFile = ZipFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         break

@@ -1,6 +1,8 @@
 package com.github.camork.filesystem
 
-import com.github.camork.util.CoreUtil
+
+import com.intellij.ide.highlighter.ArchiveFileType
+import com.intellij.openapi.fileTypes.FileTypeManager
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
@@ -20,12 +22,18 @@ abstract class ArchiveBasedFileSystem extends ArchiveFileSystem {
         return path.contains(separator)
     }
 
+    static boolean containExtension(@NotNull String path) {
+        def typeManager = FileTypeManager.getInstance()
+        def matchers = typeManager.getAssociations(ArchiveFileType.INSTANCE) + typeManager.getAssociations(MyArchiveFileType.INSTANCE)
+        return matchers.any {
+            it.acceptsCharSequence(path)
+        }
+    }
+
     static boolean isNestedFile(@NotNull String path) {
         if (StringUtils.countMatches(path, separator) > 0) {
-            for (String fileExtension : CoreUtil.ARCHIVE_EXTENSIONS) {
-                if (path.endsWith(fileExtension)) {
-                    return true
-                }
+            if (containExtension(path)) {
+                return true
             }
         }
 
