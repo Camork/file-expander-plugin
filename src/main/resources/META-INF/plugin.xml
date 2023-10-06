@@ -35,10 +35,10 @@
 	</p>
 	<p>
 		<ul>
-			<li>2.2</li>
+			<li>2.3</li>
 			<ul>
-				<li>Allowed to expand nested file if the file's type inside is added manually.
-				see https://github.com/Camork/file-expander-plugin/issues/33</li>
+				<li>Bug fix: file won't release if it contains a large nested archive.
+				see https://github.com/Camork/file-expander-plugin/issues/28</li>
 			</ul>
 		</ul>
 	</p>]]>
