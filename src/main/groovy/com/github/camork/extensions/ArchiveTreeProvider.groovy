@@ -54,7 +54,9 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                     if (!targetFile.exists()) {
                         targetFile.parentFile.mkdirs()
 
-                        Files.copy(treeNodeFile.getInputStream(), targetFile.toPath())
+                        treeNodeFile.getInputStream().withCloseable {
+                            Files.copy(it, targetFile.toPath())
+                        }
                     }
 
                     VirtualFile targetVf = LocalFileSystem.getInstance().findFileByIoFile(targetFile)
