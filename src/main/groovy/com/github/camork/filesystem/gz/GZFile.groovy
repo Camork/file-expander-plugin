@@ -44,10 +44,15 @@ class GZFile implements IArchiveFile {
         (inputStream as GzipCompressorInputStream).withCloseable {
             _innerName = it.metaData.filename
         }
-        Map entries = [:]
+
+        if (_innerName == null) {
+            int idx = _file.name.indexOf(CoreUtil.DOT + GZFileType.INSTANCE.defaultExtension)
+            _innerName = idx == -1 ? "contents" : _file.name.substring(0, idx)
+        }
 
         EntryInfo root = ArchiveUtils.createRootEntry()
 
+        Map entries = [:]
         entries.put('', root)
         entries.put(_innerName, new EntryInfo(_innerName, false, _file.length(), _file.lastModified(), root))
 
