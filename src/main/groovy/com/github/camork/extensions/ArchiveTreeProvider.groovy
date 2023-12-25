@@ -10,6 +10,8 @@ import com.github.camork.filesystem.tar.TarFileSystem
 import com.github.camork.filesystem.tar.TarFileType
 import com.github.camork.filesystem.tar.TarGzFileType
 import com.github.camork.filesystem.zip.ZipFileSystem
+import com.github.camork.filesystem.zstd.ZstdFileSystem
+import com.github.camork.filesystem.zstd.ZstdFileType
 import com.github.camork.nodes.PsiDirectoryNodeWrapper
 import com.github.camork.util.CoreUtil
 import com.intellij.ide.highlighter.ArchiveFileType
@@ -85,6 +87,9 @@ class ArchiveTreeProvider implements TreeStructureProvider {
                         break
                     case SevenZipFileType.INSTANCE:
                         archiveFile = SevenZipFileSystem.getInstance().getRootByLocal(treeNodeFile)
+                        break
+                    case ZstdFileType.INSTANCE:
+                        archiveFile = ZstdFileSystem.getInstance().getRootByLocal(treeNodeFile)
                         break
                 }
 

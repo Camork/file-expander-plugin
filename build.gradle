@@ -21,6 +21,7 @@ configurations.testImplementation.extendsFrom(configurations.compileOnly)
 dependencies {
     compileOnly 'org.codehaus.groovy:groovy-all:3.0.13'
     compileOnly 'org.apache.commons:commons-compress:1.23.0'
+    implementation('com.github.luben:zstd-jni:1.5.5-9')
 }
 
 intellij {

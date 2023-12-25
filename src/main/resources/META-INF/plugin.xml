@@ -60,10 +60,13 @@
 				  fieldName="INSTANCE"/>
 		<fileType name="7ZIP" extensions="7z"
 				  implementationClass="com.github.camork.filesystem.sevenzip.SevenZipFileType" fieldName="INSTANCE"/>
+		<fileType name="ZSTANDARD" extensions="zst" implementationClass="com.github.camork.filesystem.zstd.ZstdFileType"
+				  fieldName="INSTANCE"/>
 		<virtualFileSystem key="gzip" implementationClass="com.github.camork.filesystem.gz.GZFileSystemImpl"/>
 		<virtualFileSystem key="tar" implementationClass="com.github.camork.filesystem.tar.TarFileSystemImpl"/>
 		<virtualFileSystem key="7z" implementationClass="com.github.camork.filesystem.sevenzip.SevenZipFileSystemImpl"/>
 		<virtualFileSystem key="zip" implementationClass="com.github.camork.filesystem.zip.ZipFileSystemImpl"/>
+		<virtualFileSystem key="zst" implementationClass="com.github.camork.filesystem.zstd.ZstdFileSystem"/>
 	</extensions>
 
 </idea-plugin>
