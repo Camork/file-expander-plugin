@@ -3,7 +3,7 @@ package com.github.camork.filesystem.zstd
 import com.github.camork.filesystem.IArchiveFile
 import com.github.camork.util.ArchiveUtils
 import com.github.camork.util.EntryInfo
-import com.github.luben.zstd.ZstdInputStream
+import io.airlift.compress.zstd.ZstdInputStream
 
 class ZstdFile implements IArchiveFile {
     private final File file
