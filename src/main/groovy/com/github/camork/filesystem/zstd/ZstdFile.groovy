@@ -18,7 +18,9 @@ class ZstdFile implements IArchiveFile {
         Map entries = new HashMap<String, ?>()
         EntryInfo root = ArchiveUtils.createRootEntry()
         entries.put('', root)
-        entries.put('contents', new EntryInfo('contents', false, file.length(), file.lastModified(), root))
+
+        def entryName = file.name.replace('.zst', '')
+        entries.put(entryName, new EntryInfo(entryName, false, file.length(), file.lastModified(), root))
 
         return entries
     }
