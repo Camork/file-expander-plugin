@@ -35,10 +35,10 @@
 	</p>
 	<p>
 		<ul>
-			<li>2.3</li>
+			<li>2.4</li>
 			<ul>
-				<li>Bug fix: file won't release if it contains a large nested archive.
-				see https://github.com/Camork/file-expander-plugin/issues/28</li>
+				<li>Feature: Support zstd compression</li>
+				<li>Bug fix: gzip file with no filename metadata</li>
 			</ul>
 		</ul>
 	</p>]]>

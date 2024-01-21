@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.camork'
-version '2.3'
+version '2.4'
 
 sourceCompatibility = 17
 targetCompatibility = 17
