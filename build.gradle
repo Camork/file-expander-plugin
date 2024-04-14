@@ -1,10 +1,10 @@
 plugins {
     id 'groovy'
-    id 'org.jetbrains.intellij' version '1.15.0'
+    id 'org.jetbrains.intellij' version '1.17.3'
 }
 
 group 'com.github.camork'
-version '2.4'
+version '2.5'
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -19,13 +19,13 @@ repositories {
 configurations.testImplementation.extendsFrom(configurations.compileOnly)
 
 dependencies {
-    compileOnly 'org.codehaus.groovy:groovy-all:3.0.13'
+    compileOnly 'org.codehaus.groovy:groovy-all:3.0.19'
     compileOnly 'org.apache.commons:commons-compress:1.23.0'
     implementation 'io.airlift:aircompressor:0.25'
 }
 
 intellij {
-    version = "2023.2"
+    version = "2024.1"
     plugins = ['java']
     version project.version
 }
@@ -41,5 +41,5 @@ patchPluginXml {
 }
 
 publishPlugin {
-    token = "$token"
+    token = providers.environmentVariable("token")
 }

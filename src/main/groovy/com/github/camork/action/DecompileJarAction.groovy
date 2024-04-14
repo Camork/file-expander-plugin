@@ -3,6 +3,7 @@ package com.github.camork.action
 
 import com.intellij.ide.highlighter.ArchiveFileType
 import com.intellij.ide.highlighter.JavaClassFileType
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -47,6 +48,11 @@ class DecompileJarAction extends AnAction {
                 localVf.parent.refresh(false, true)
             }
         })
+    }
+
+    @Override
+    ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT
     }
 
     void visit(Path dir, VirtualFile parent) {

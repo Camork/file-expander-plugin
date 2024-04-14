@@ -35,10 +35,9 @@
 	</p>
 	<p>
 		<ul>
-			<li>2.4</li>
+			<li>2.5</li>
 			<ul>
-				<li>Feature: Support zstd compression</li>
-				<li>Bug fix: gzip file with no filename metadata</li>
+				<li>Compatible with IDEA 2024.1</li>
 			</ul>
 		</ul>
 	</p>]]>
