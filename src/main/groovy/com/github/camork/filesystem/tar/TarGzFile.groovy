@@ -19,8 +19,12 @@ class TarGzFile extends TarFile {
     ArchiveInputStream getInputStream() {
         _fileInputStream = new FileInputStream(_file)
 
-        _gcInputStream = new GzipCompressorInputStream(_fileInputStream)
-
+        try {
+            _gcInputStream = new GzipCompressorInputStream(_fileInputStream)
+        } catch (IOException ignored) {
+            _fileInputStream.close()
+            return null
+        }
         return new TarArchiveInputStream(_gcInputStream)
     }
 

@@ -27,7 +27,7 @@ class ZstdFile implements IArchiveFile {
 
     @Override
     byte[] getEntryBytes(String relativePath) {
-        return getInputStream().withCloseable { it.bytes }
+        return getInputStream()?.withCloseable { it.bytes }
     }
 
     @Override

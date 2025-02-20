@@ -7,6 +7,7 @@ import com.github.camork.util.ArchiveUtils
 import com.github.camork.util.CoreUtil
 import com.github.camork.util.EntryInfo
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
+import org.jetbrains.annotations.Nullable
 
 /**
  * @author Charles Wu
@@ -41,7 +42,14 @@ class GZFile implements IArchiveFile {
             return _tarGzFile.createEntriesInfoMap()
         }
 
-        (inputStream as GzipCompressorInputStream).withCloseable {
+        Map<String, ?> entries = [:]
+
+        InputStream stream = getInputStream()
+        if (stream == null) {
+            return entries
+        }
+
+        (stream as GzipCompressorInputStream).withCloseable {
             _innerName = it.metaData.filename
         }
 
@@ -52,7 +60,6 @@ class GZFile implements IArchiveFile {
 
         EntryInfo root = ArchiveUtils.createRootEntry()
 
-        Map entries = [:]
         entries.put('', root)
         entries.put(_innerName, new EntryInfo(_innerName, false, _file.length(), _file.lastModified(), root))
 
@@ -65,11 +72,17 @@ class GZFile implements IArchiveFile {
             return _tarGzFile.getEntryBytes(relativePath)
         }
 
-        return inputStream.withCloseable {
+        InputStream stream = getInputStream()
+        if (stream == null) {
+            return new byte[0]
+        }
+
+        return stream?.withCloseable {
             it.bytes
         }
     }
 
+    @Nullable
     @Override
     InputStream getInputStream() {
         if (_tarGzFile != null) {
@@ -78,7 +91,12 @@ class GZFile implements IArchiveFile {
 
         _inputStream = _file.newInputStream()
 
-        return _gZIPInputStream = new GzipCompressorInputStream(_inputStream)
+        try {
+            return _gZIPInputStream = new GzipCompressorInputStream(_inputStream)
+        } catch (IOException ignored) {
+            _inputStream.close()
+            return null
+        }
     }
 
     @Override

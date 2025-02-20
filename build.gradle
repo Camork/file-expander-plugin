@@ -1,6 +1,6 @@
 plugins {
     id 'groovy'
-    id 'org.jetbrains.intellij' version '1.17.3'
+    id 'org.jetbrains.intellij.platform' version '2.2.1'
 }
 
 group 'com.github.camork'
@@ -13,26 +13,27 @@ repositories {
     maven {
         url = 'https://maven.aliyun.com/nexus/content/groups/public/'
     }
+    intellijPlatform {
+        defaultRepositories()
+    }
     mavenCentral()
 }
 
 configurations.testImplementation.extendsFrom(configurations.compileOnly)
 
 dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity('2024.3')
+        bundledPlugin 'com.intellij.java'
+    }
+
     compileOnly 'org.codehaus.groovy:groovy-all:3.0.19'
-    compileOnly 'org.apache.commons:commons-compress:1.23.0'
+    compileOnly 'org.apache.commons:commons-compress:1.26.1'
     implementation 'io.airlift:aircompressor:0.25'
 }
 
-intellij {
-    version = "2024.1"
-    plugins = ['java']
+intellijPlatform {
     version project.version
-}
-
-runIde {
-    jvmArgs "-Xmx512m"
-    jbrVersion = ""
 }
 
 patchPluginXml {

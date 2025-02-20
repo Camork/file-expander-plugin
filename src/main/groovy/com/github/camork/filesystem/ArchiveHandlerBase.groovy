@@ -49,7 +49,8 @@ abstract class ArchiveHandlerBase<T extends IArchiveFile> extends ArchiveHandler
 
     @Override
     byte[] contentsToByteArray(@NotNull String relativePath) throws IOException {
-        return acquireFileHandle().get().getEntryBytes(relativePath)
+        def bytes = acquireFileHandle().get().getEntryBytes(relativePath)
+        return bytes == null ? new byte[0] : bytes
     }
 
     private FileAccessorCache.Handle<T> getCachedFileHandle(boolean createIfNeeded) throws IOException {
