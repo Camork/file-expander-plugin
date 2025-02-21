@@ -1,13 +1,10 @@
 plugins {
-    id 'groovy'
     id 'org.jetbrains.intellij.platform' version '2.2.1'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group 'com.github.camork'
-version '2.5'
-
-sourceCompatibility = 17
-targetCompatibility = 17
+version '3.0'
 
 repositories {
     maven {
@@ -21,19 +18,27 @@ repositories {
 
 configurations.testImplementation.extendsFrom(configurations.compileOnly)
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     intellijPlatform {
         intellijIdeaCommunity('2024.3')
         bundledPlugin 'com.intellij.java'
     }
 
-    compileOnly 'org.codehaus.groovy:groovy-all:3.0.19'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compileOnly 'org.apache.commons:commons-compress:1.26.1'
     implementation 'io.airlift:aircompressor:0.25'
 }
 
 intellijPlatform {
     version project.version
+}
+
+runIde {
+    jvmArgs '-XX:+AllowEnhancedClassRedefinition'
 }
 
 patchPluginXml {
