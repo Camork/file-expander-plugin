@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.intellij.platform' version '2.2.1'
+    id 'org.jetbrains.intellij.platform' version '2.5.0'
     id 'org.jetbrains.kotlin.jvm'
 }
 
@@ -7,9 +7,6 @@ group 'com.github.camork'
 version '3.0'
 
 repositories {
-    maven {
-        url = 'https://maven.aliyun.com/nexus/content/groups/public/'
-    }
     intellijPlatform {
         defaultRepositories()
     }
@@ -31,6 +28,15 @@ dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compileOnly 'org.apache.commons:commons-compress:1.26.1'
     implementation 'io.airlift:aircompressor:0.25'
+
+    testImplementation("org.assertj:assertj-core:3.27.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.1.10")
+
+    testImplementation(platform("org.junit:junit-bom:5.12.2"))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+    testRuntimeOnly("org.assertj:assertj-core:3.27.2")
 }
 
 intellijPlatform {
@@ -48,4 +54,8 @@ patchPluginXml {
 
 publishPlugin {
     token = providers.environmentVariable("token")
+}
+
+test {
+    useJUnitPlatform()
 }

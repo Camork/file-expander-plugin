@@ -41,7 +41,7 @@ class GZFile(private val _file: File) : IArchiveFile {
         val stream = getInputStream() ?: return entries
 
         (stream as GzipCompressorInputStream).use {
-            _innerName = it.metaData.filename
+            _innerName = it.metaData.fileName
         }
 
         if (_innerName == null) {
@@ -72,7 +72,7 @@ class GZFile(private val _file: File) : IArchiveFile {
 
         _inputStream = _file.inputStream().buffered()
         return try {
-            _gZIPInputStream = GzipCompressorInputStream(_inputStream)
+            _gZIPInputStream = GzipCompressorInputStream(_inputStream, true)
             _gZIPInputStream
         } catch (_: IOException) {
             _inputStream?.close()

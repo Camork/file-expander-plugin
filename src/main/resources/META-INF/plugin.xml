@@ -38,6 +38,7 @@
 			<li>3.0</li>
 			<ul>
 				<li>Bug fix: unable to delete an empty archive file</li>
+				<li>Bug fix: decompressing a .gz file might give incomplete data</li>
 				<li>Rewrite codebase to kotlin.</li>
 			</ul>
 		</ul>
