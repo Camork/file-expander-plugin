@@ -1,10 +1,13 @@
+import org.jetbrains.changelog.Changelog
+
 plugins {
     id 'org.jetbrains.intellij.platform' version '2.5.0'
     id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.changelog' version '2.2.1'
 }
 
-group 'com.github.camork'
-version '3.0'
+group = 'com.github.camork'
+version = '3.0'
 
 repositories {
     intellijPlatform {
@@ -14,6 +17,7 @@ repositories {
 }
 
 configurations.testImplementation.extendsFrom(configurations.compileOnly)
+buildPlugin.dependsOn check
 
 kotlin {
     jvmToolchain(17)
@@ -40,7 +44,13 @@ dependencies {
 }
 
 intellijPlatform {
-    version project.version
+    version = project.version
+
+    pluginVerification {
+        ides {
+            recommended()
+        }
+    }
 }
 
 runIde {
@@ -49,11 +59,29 @@ runIde {
 
 patchPluginXml {
     sinceBuild = "223"
-    untilBuild = ""
+
+    changeNotes = provider {
+        def content = changelog
+                .getUnreleased()
+                .withHeader(false)
+                .withEmptySections(false)
+        changelog.renderItem(content, Changelog.OutputType.HTML)
+    }
+}
+
+changelog {
+    groups = ["Changed", "Fixed"]
+    repositoryUrl = "https://github.com/Camork/file-expander-plugin"
+}
+
+signPlugin {
+    certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+    privateKey = providers.environmentVariable("PRIVATE_KEY")
+    password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
 }
 
 publishPlugin {
-    token = providers.environmentVariable("token")
+    token = providers.environmentVariable("PUBLISH_TOKEN")
 }
 
 test {
